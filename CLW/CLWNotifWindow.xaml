@@ -1,0 +1,165 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CLW"
+        xmlns:Custom="http://metro.mahapps.com/winfx/xaml/iconpacks" xmlns:SampleData="clr-namespace:Expression.Blend.SampleData.DummyNotificationWindowData" x:Class="CLW.CLWNotifWindow"
+        mc:Ignorable="d"
+        Title="CLWNotification" Width="328" Background="#FF1A1A1A" ResizeMode="NoResize" WindowStyle="None" Topmost="True" TextOptions.TextFormattingMode="Display" Loaded="Window_Loaded" Foreground="#FFD8D8D8" Height="124.839">
+
+    <Window.Resources>
+
+        <SampleData:DummyNotificationWindowData x:Key="DummyNotificationWindowData" d:IsDataSource="True"/>
+
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <SolidColorBrush x:Key="LinesGrayColor" Color="#FF494949"/>
+        <SolidColorBrush x:Key="NotificationWindowButtonsForegroud" Color="#FFD6D6D6"/>
+        <SolidColorBrush x:Key="NotifWinButtonsFourgrondGreenish" Color="#FF9DD6BA"/>
+        <SolidColorBrush x:Key="NotifcaionWinButtonsForeground_hover" Color="#FF83E6AB"/>
+        <ControlTemplate x:Key="HovrHighlightForegroundButton" TargetType="{x:Type Button}">
+            <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition">
+                <Grid Margin="0" d:LayoutOverrides="Width, Height" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock x:Name="unreadInfo" Margin="20,1,0,2" TextWrapping="Wrap" FontSize="13.333" HorizontalAlignment="Left" VerticalAlignment="Center" Text="NEWS" Foreground="{DynamicResource NotificationWindowButtonsForegroud}"/>
+                    <Grid x:Name="icon" HorizontalAlignment="Left" Width="16" VerticalAlignment="Center" Height="16" d:LayoutOverrides="TopMargin, BottomMargin">
+                        <Custom:PackIconBootstrapIcons x:Name="packIconBootstrapIcons" HorizontalAlignment="Stretch" Height="16" Margin="0" VerticalAlignment="Stretch" Width="16" Kind="ListStars" Foreground="{DynamicResource NotificationWindowButtonsForegroud}"/>
+                    </Grid>
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" TargetName="packIconBootstrapIcons" Value="{DynamicResource NotifcaionWinButtonsForeground_hover}"/>
+                    <Setter Property="Foreground" TargetName="unreadInfo" Value="{DynamicResource NotifcaionWinButtonsForeground_hover}"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Foreground" TargetName="unreadInfo" Value="#FFA0A0A0"/>
+                    <Setter Property="Foreground" TargetName="packIconBootstrapIcons" Value="#FFA0A0A0"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="True"/>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.6"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="SeenButtonControlTemplate" TargetType="{x:Type Button}">
+            <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition">
+                <Grid Margin="0" d:LayoutOverrides="Width, Height" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock x:Name="unreadInfo" Margin="20,1,0,2" TextWrapping="Wrap" FontSize="13.333" HorizontalAlignment="Left" VerticalAlignment="Center" Text="SEEN" Foreground="{DynamicResource NotificationWindowButtonsForegroud}"/>
+                    <Grid x:Name="icon" HorizontalAlignment="Left" Width="16" VerticalAlignment="Center" Height="16" d:LayoutOverrides="TopMargin, BottomMargin">
+                        <Custom:PackIconBootstrapIcons x:Name="packIconBootstrapIcons" HorizontalAlignment="Stretch" Height="16" Margin="0" VerticalAlignment="Stretch" Width="16" Kind="CheckAll" Foreground="{DynamicResource NotificationWindowButtonsForegroud}"/>
+                    </Grid>
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" TargetName="packIconBootstrapIcons" Value="{DynamicResource NotifcaionWinButtonsForeground_hover}"/>
+                    <Setter Property="Foreground" TargetName="unreadInfo" Value="{DynamicResource NotifcaionWinButtonsForeground_hover}"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Foreground" TargetName="unreadInfo" Value="#FFA0A0A0"/>
+                    <Setter Property="Foreground" TargetName="packIconBootstrapIcons" Value="#FFA0A0A0"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="True"/>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.6"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="dOWNLOADButtonControlTemplate1" TargetType="{x:Type Button}">
+            <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition" Background="#00000000">
+                <Grid Margin="0" d:LayoutOverrides="Width, Height" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock x:Name="unreadInfo" Margin="20,1,0,2" TextWrapping="Wrap" FontSize="13.333" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{DynamicResource NotificationWindowButtonsForegroud}" Text="DOWNLOAD"/>
+                    <Grid x:Name="icon" HorizontalAlignment="Left" Width="16" VerticalAlignment="Center" Height="16" d:LayoutOverrides="TopMargin, BottomMargin">
+                        <Custom:PackIconRadixIcons x:Name="packIconRadixIcons" HorizontalAlignment="Stretch" Height="16" VerticalAlignment="Stretch" Width="16" Margin="0" Foreground="{DynamicResource NotificationWindowButtonsForegroud}" Kind="Download"/>
+                    </Grid>
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" TargetName="unreadInfo" Value="{DynamicResource NotifcaionWinButtonsForeground_hover}"/>
+                    <Setter Property="Foreground" TargetName="packIconRadixIcons" Value="{DynamicResource NotifcaionWinButtonsForeground_hover}"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Foreground" TargetName="unreadInfo" Value="#FFA0A0A0"/>
+                    <Setter Property="Foreground" TargetName="packIconRadixIcons" Value="#FFA0A0A0"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="True"/>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.6"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo/>
+    </Window.TaskbarItemInfo>
+    <Border BorderBrush="#FF333333" BorderThickness="1" DataContext="{Binding Source={StaticResource DummyNotificationWindowData}}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid Width="Auto" UseLayoutRounding="True" Margin="0,4" Background="#00640404" Grid.RowSpan="2">
+                <Border Height="Auto" Margin="0" BorderBrush="#002F2F37" BorderThickness="1" d:LayoutOverrides="Width, Height">
+                    <Grid Background="#001C1C1C" Height="Auto" Width="Auto" Margin="1,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="51"/>
+                        </Grid.RowDefinitions>
+                        <Grid x:Name="IcoAndTitle" Margin="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="48"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Image x:Name="image" Margin="0" Width="32" Height="32" Source="{Binding WatcherIcon}"/>
+
+                            <TextBlock x:Name="title" FontSize="14.667" Foreground="#FFD1D1D1" UseLayoutRounding="True" TextWrapping="Wrap" ClipToBounds="True" SnapsToDevicePixels="True" Text="{Binding NItemTitle}" Grid.Column="1"/>
+                        </Grid>
+                        <Border x:Name="Actions" Margin="10,0,10,2" Background="#00000000" Grid.Row="1" Height="23" VerticalAlignment="Bottom" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource LinesGrayColor}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="2"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="2"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Button x:Name="ShowNewsButt"  Background="#00000000" BorderBrush="{x:Null}" Foreground="{DynamicResource FocalDarkGreen}" Click="ShowNewsButt_Click" Margin="0" d:LayoutOverrides="LeftPosition, RightPosition" Height="20" Template="{DynamicResource HovrHighlightForegroundButton}"/>
+                                <Path Data="M110.75,2.75 L110.75,15.730769" Margin="0" Stretch="Fill" Stroke="{DynamicResource LinesGrayColor}" UseLayoutRounding="False" Width="1" Height="15" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
+                                <Button x:Name="MarkAsReadButt"  Background="#00000000" BorderBrush="{x:Null}" Foreground="#FFDED8D8" Click="MarkAsReadButt_Click" Margin="0" Height="20" Grid.Column="1" Grid.ColumnSpan="2" Template="{DynamicResource SeenButtonControlTemplate}"/>
+                                <Path Data="M110.75,2.75 L110.75,15.730769" Margin="0" Stretch="Fill" Stroke="{DynamicResource LinesGrayColor}" UseLayoutRounding="False" Width="1" VerticalAlignment="Center" Height="15" HorizontalAlignment="Center" Grid.Column="3" Visibility="Hidden"/>
+                                <Button x:Name="DownloadBtton"  Background="{DynamicResource NotifcaionWinButtonsForeground_hover}" BorderBrush="{x:Null}" Height="20" Click="DownloadBtton_Click" Margin="0" Grid.Column="4" Foreground="#FF9DD6BA" Template="{DynamicResource dOWNLOADButtonControlTemplate1}">
+                                    <Grid>
+                                        <TextBlock x:Name="unreadInfo2" Margin="20,1,0,2" TextWrapping="Wrap" Foreground="{DynamicResource NotificationWindowButtonsForegroud}" FontSize="13.333" HorizontalAlignment="Left" VerticalAlignment="Center" Text="DOWNLOAD"/>
+                                        <Grid x:Name="bell2" HorizontalAlignment="Left" Width="16" VerticalAlignment="Center" Height="16" d:LayoutOverrides="TopMargin, BottomMargin">
+                                            <Image x:Name="bellIco2" Height="16" VerticalAlignment="Center"  Margin="0" HorizontalAlignment="Center" Width="16" Opacity="0.7"/>
+                                            <Custom:PackIconRadixIcons HorizontalAlignment="Stretch" Height="17" Margin="0" VerticalAlignment="Bottom" Width="17" Kind="PinBottom" Foreground="{DynamicResource NotificationWindowButtonsForegroud}"/>
+                                        </Grid>
+                                    </Grid>
+                                </Button>
+                            </Grid>
+                        </Border>
+                        <Grid x:Name="LinkOrCount" Height="21" Margin="10,0,17,0" Grid.Row="1" VerticalAlignment="Top" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+                            <TextBlock x:Name="fastLink" Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding NItemFastLink}" Foreground="#FF0097FF" HorizontalAlignment="Left" VerticalAlignment="Center" Cursor="Hand">
+								<!--<i:Interaction.Triggers>
+                            		<i:EventTrigger EventName="MouseLeftButtonDown">
+                            			<ei:LaunchUriOrFileAction Path="{Binding Text, ElementName=fastLink}"/>
+                            		</i:EventTrigger>
+                            	</i:Interaction.Triggers>-->
+                            </TextBlock>
+                            <TextBlock x:Name="countInfo" Margin="10,0,0,0" TextWrapping="Wrap" Text="and 4 more.." Foreground="#FFA2A2A2" FontSize="10.667" HorizontalAlignment="Left" VerticalAlignment="Center" Visibility="Hidden"/>
+                        </Grid>
+
+                    </Grid>
+                </Border>
+            </Grid>
+            <!--local:ButtonMi x:Name="CloseButt" HorizontalAlignment="Right" Height="16" Margin="0,4,5,0" VerticalAlignment="Top" Width="16" iconSource="media/x-16-white.png" Click="CloseButt_Click"/-->
+
+
+        </Grid>
+    </Border>
+</Window>

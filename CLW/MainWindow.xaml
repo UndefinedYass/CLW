@@ -1,0 +1,868 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CLW"
+        xmlns:Custom="http://metro.mahapps.com/winfx/xaml/iconpacks" xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="CLW.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="470" Width="815" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" TextOptions.TextFormattingMode="Display" SnapsToDevicePixels="True" UseLayoutRounding="True" Icon="media/tempEyeIcon/red-eye-transp.ico" d:DataContext="{d:DesignData /SampleData/SessionSampleData.xaml}">
+    <Window.Resources>
+        <Storyboard x:Key="OnMouseEnter1"/>
+        <Storyboard x:Key="OnMouseLeave1"/>
+        <Storyboard x:Key="OnMouseEnter2"/>
+        <Storyboard x:Key="OnMouseLeave2"/>
+        <ControlTemplate x:Key="IconButtonMiControlTemplate1" TargetType="{x:Type local:IconButtonMi}">
+            <ControlTemplate.Resources>
+                <Storyboard x:Key="Storyboard1">
+                    <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="grid">
+                        <EasingColorKeyFrame KeyTime="0" Value="#FF007ACC"/>
+                    </ColorAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="contentPresenter">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="20"/>
+                    </DoubleAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="contentPresenter">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="20"/>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+                <Storyboard x:Key="Storyboard2">
+                    <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="grid">
+                        <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#FF161616"/>
+                    </ColorAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="contentPresenter">
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="18"/>
+                    </DoubleAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="contentPresenter">
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="18"/>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+                <Storyboard x:Key="gotPressed"/>
+                <Storyboard x:Key="gotUnpressed"/>
+            </ControlTemplate.Resources>
+            <Border x:Name="grid" Background="#FF161616" CornerRadius="48" BorderBrush="#00898989" BorderThickness="1" UseLayoutRounding="True">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal"/>
+                        <VisualState x:Name="MouseOver"/>
+                        <VisualState x:Name="Pressed">
+                            <Storyboard>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="grid">
+                                    <EasingColorKeyFrame KeyTime="0" Value="#FF0863A0"/>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Disabled"/>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <ContentPresenter x:Name="contentPresenter" Margin="0" Width="18" Height="18" HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="False"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsPressed" Value="True">
+                    <Trigger.ExitActions>
+                        <BeginStoryboard x:Name="gotUnpressed_BeginStoryboard" Storyboard="{StaticResource gotUnpressed}"/>
+                    </Trigger.ExitActions>
+                    <Trigger.EnterActions>
+                        <BeginStoryboard x:Name="gotPressed_BeginStoryboard" Storyboard="{StaticResource gotPressed}"/>
+                    </Trigger.EnterActions>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.ExitActions>
+                        <BeginStoryboard x:Name="Storyboard2_BeginStoryboard" Storyboard="{StaticResource Storyboard2}"/>
+                    </Trigger.ExitActions>
+                    <Trigger.EnterActions>
+                        <BeginStoryboard Storyboard="{StaticResource Storyboard1}"/>
+                    </Trigger.EnterActions>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="IconButtonMi_hoverIcon_big_blue" TargetType="{x:Type local:IconButtonMi}">
+            <ControlTemplate.Resources>
+                <Storyboard x:Key="Storyboard1">
+                    <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="grid">
+                        <EasingColorKeyFrame KeyTime="0" Value="#FF007ACC"/>
+                    </ColorAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="contentPresenter">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="20"/>
+                    </DoubleAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="contentPresenter">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="20"/>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+                <Storyboard x:Key="Storyboard2">
+                    <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="grid">
+                        <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#FF161616"/>
+                    </ColorAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="contentPresenter">
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="18"/>
+                    </DoubleAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="contentPresenter">
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="18"/>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+                <Storyboard x:Key="gotPressed"/>
+                <Storyboard x:Key="gotUnpressed"/>
+            </ControlTemplate.Resources>
+            <Border x:Name="grid" Background="#FF161616" CornerRadius="48" BorderBrush="#00898989" BorderThickness="1" UseLayoutRounding="True" Width="48" Height="48">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal"/>
+                        <VisualState x:Name="MouseOver"/>
+                        <VisualState x:Name="Pressed">
+                            <Storyboard>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="grid">
+                                    <EasingColorKeyFrame KeyTime="0" Value="#FF0863A0"/>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Disabled"/>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <ContentPresenter x:Name="contentPresenter" Margin="0" Width="18" Height="18" HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="False"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsPressed" Value="True">
+                    <Trigger.ExitActions>
+                        <BeginStoryboard x:Name="gotUnpressed_BeginStoryboard" Storyboard="{StaticResource gotUnpressed}"/>
+                    </Trigger.ExitActions>
+                    <Trigger.EnterActions>
+                        <BeginStoryboard x:Name="gotPressed_BeginStoryboard" Storyboard="{StaticResource gotPressed}"/>
+                    </Trigger.EnterActions>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.ExitActions>
+                        <BeginStoryboard x:Name="Storyboard2_BeginStoryboard" Storyboard="{StaticResource Storyboard2}"/>
+                    </Trigger.ExitActions>
+                    <Trigger.EnterActions>
+                        <BeginStoryboard Storyboard="{StaticResource Storyboard1}"/>
+                    </Trigger.EnterActions>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="IconButtonMi_iconHover_small_blue" TargetType="{x:Type local:IconButtonMi}">
+            <ControlTemplate.Resources>
+                <Storyboard x:Key="Storyboard1">
+                    <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="grid">
+                        <EasingColorKeyFrame KeyTime="0" Value="#FF007ACC"/>
+                    </ColorAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="contentPresenter">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="18"/>
+                    </DoubleAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="contentPresenter">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="18"/>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+                <Storyboard x:Key="Storyboard2">
+                    <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="grid">
+                        <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#FF161616"/>
+                    </ColorAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="contentPresenter">
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="16"/>
+                    </DoubleAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="contentPresenter">
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="16"/>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+                <Storyboard x:Key="gotPressed"/>
+                <Storyboard x:Key="gotUnpressed"/>
+            </ControlTemplate.Resources>
+            <Border x:Name="grid" Background="#FF161616" CornerRadius="48" BorderBrush="#00898989" BorderThickness="1" UseLayoutRounding="True" Width="30" Height="30">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal"/>
+                        <VisualState x:Name="MouseOver"/>
+                        <VisualState x:Name="Pressed">
+                            <Storyboard>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="grid">
+                                    <EasingColorKeyFrame KeyTime="0" Value="#FF0863A0"/>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Disabled"/>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <ContentPresenter x:Name="contentPresenter" Margin="0" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="False"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsPressed" Value="True">
+                    <Trigger.ExitActions>
+                        <BeginStoryboard x:Name="gotUnpressed_BeginStoryboard" Storyboard="{StaticResource gotUnpressed}"/>
+                    </Trigger.ExitActions>
+                    <Trigger.EnterActions>
+                        <BeginStoryboard x:Name="gotPressed_BeginStoryboard" Storyboard="{StaticResource gotPressed}"/>
+                    </Trigger.EnterActions>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.ExitActions>
+                        <BeginStoryboard x:Name="Storyboard2_BeginStoryboard" Storyboard="{StaticResource Storyboard2}"/>
+                    </Trigger.ExitActions>
+                    <Trigger.EnterActions>
+                        <BeginStoryboard Storyboard="{StaticResource Storyboard1}"/>
+                    </Trigger.EnterActions>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <Storyboard x:Key="OnMouseLeftButtonDown1"/>
+        <Storyboard x:Key="miToggleTry1">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="thumb">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.32" Value="-9"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="thumb">
+                <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.32" Value="#FF161616"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="miToggleReverseTry1">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="thumb">
+                <EasingColorKeyFrame KeyTime="0" Value="#FF161616"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.28" Value="White"/>
+            </ColorAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="thumb">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-9"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.28" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="miOff">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="thumb">
+                <EasingColorKeyFrame KeyTime="0" Value="#FF35CB8E"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#FFD1D1D1">
+                    <EasingColorKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseOut"/>
+                    </EasingColorKeyFrame.EasingFunction>
+                </EasingColorKeyFrame>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="tracker">
+                <EasingColorKeyFrame KeyTime="0" Value="#FF447460"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#FF767676">
+                    <EasingColorKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseOut"/>
+                    </EasingColorKeyFrame.EasingFunction>
+                </EasingColorKeyFrame>
+            </ColorAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="thumb">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-9"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="thumb">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.9"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="thumb">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.9"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="miOn">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="thumb">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-9"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="thumb">
+                <EasingColorKeyFrame KeyTime="0" Value="#FFD1D1D1"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#FF35CB8E">
+                    <EasingColorKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseOut"/>
+                    </EasingColorKeyFrame.EasingFunction>
+                </EasingColorKeyFrame>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="tracker">
+                <EasingColorKeyFrame KeyTime="0" Value="#FF767676"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#FF447460">
+                    <EasingColorKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseOut"/>
+                    </EasingColorKeyFrame.EasingFunction>
+                </EasingColorKeyFrame>
+            </ColorAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="thumb">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.9"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="thumb">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.9"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <ControlTemplate x:Key="ToggleButtonControlTemplate1" TargetType="{x:Type ToggleButton}">
+            <Grid x:Name="miToggle" HorizontalAlignment="Center" Margin="0" Width="24" Background="#00000000" Height="16" VerticalAlignment="Center" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CheckStates">
+                        <VisualStateGroup.Transitions>
+                            <VisualTransition From="Unchecked" GeneratedDuration="0" To="Checked">
+                                <Storyboard>
+                                    <DoubleAnimation Duration="0:0:0.2" To="8" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="thumb"/>
+                                    <ColorAnimation Duration="0:0:0.2" To="#FF35CB8E" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="thumb"/>
+                                    <ColorAnimation Duration="0:0:0.2" To="#FF447460" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="tracker"/>
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="thumb">
+                                        <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.9"/>
+                                        <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+                                    </DoubleAnimationUsingKeyFrames>
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="thumb">
+                                        <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.9"/>
+                                        <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+                                    </DoubleAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </VisualTransition>
+                            <VisualTransition From="Checked" GeneratedDuration="0" To="Unchecked">
+                                <Storyboard>
+                                    <DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="thumb"/>
+                                    <ColorAnimation Duration="0:0:0.2" To="#FFD1D1D1" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="thumb"/>
+                                    <ColorAnimation Duration="0:0:0.2" To="#FF767676" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="tracker"/>
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="thumb">
+                                        <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.9"/>
+                                        <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+                                    </DoubleAnimationUsingKeyFrames>
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="thumb">
+                                        <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.9"/>
+                                        <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+                                    </DoubleAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </VisualTransition>
+                        </VisualStateGroup.Transitions>
+                        <VisualState x:Name="Checked">
+                            <Storyboard>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="thumb">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="8"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="thumb">
+                                    <EasingColorKeyFrame KeyTime="0" Value="#FF35CB8E"/>
+                                </ColorAnimationUsingKeyFrames>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="tracker">
+                                    <EasingColorKeyFrame KeyTime="0" Value="#FF447460"/>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Unchecked"/>
+                        <VisualState x:Name="Indeterminate">
+                            <Storyboard>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="thumb">
+                                    <EasingColorKeyFrame KeyTime="0" Value="#FF35CB8E"/>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <Grid Height="16" Margin="0" VerticalAlignment="Top" Width="24">
+                    <Rectangle x:Name="tracker" Margin="0,3,0,0" Stroke="{x:Null}" RadiusY="5" RadiusX="5" StrokeThickness="1" Height="10" VerticalAlignment="Top" Fill="#FF767676" HorizontalAlignment="Stretch" Width="24"/>
+                    <Ellipse x:Name="thumb" Height="16" Margin="0" Stroke="{x:Null}" StrokeThickness="0" VerticalAlignment="Center" Width="16" HorizontalAlignment="Left" Fill="#FFD1D1D1" RenderTransformOrigin="0.5,0.5">
+                        <Ellipse.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Ellipse.RenderTransform>
+                    </Ellipse>
+                </Grid>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True"/>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="HIconButtonControlTemplate1" TargetType="{x:Type local:HIconButton}">
+            <Grid Background="#00000000">
+                <ContentPresenter Margin="0"/>
+            </Grid>
+        </ControlTemplate>
+        <DataTemplate x:Key="DataTemplate1">
+            <Grid>
+                <local:WatcherUC/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="DataTemplate2" DataType="local:CustomLW">
+            <Grid Height="58" Width="Auto">
+                <local:WatcherUC Title="{Binding Name}"  StateText="{Binding StatusMessage}" NewsCount="{Binding UnreadCount}"  Margin="0" Padding="0" ScrollViewer.VerticalScrollBarVisibility="Auto" Width="Auto" Foreground="#FFD4D4D4" Background="#00551919" Favico="{Binding IconSource}" CoreCustomListWatcher="{Binding Mode=OneWay}"  />
+            </Grid>
+        </DataTemplate>
+        <Style x:Key="ListBoxItemStyle1" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="Padding" Value="2,0,0,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border x:Name="Bd" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true" Background="{DynamicResource WatcherUC_DefaultBg}" Margin="4,2" BorderThickness="0,0,2,0" BorderBrush="#00B22A2A">
+                            <ContentPresenter x:Name="contentPresenter" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter Property="Background" TargetName="Bd" Value="{DynamicResource WatcherUC_HighlightedBg}"/>
+                                <Setter Property="BorderBrush" TargetName="Bd" Value="{DynamicResource WatcherUC_Selected_borderColor}"/>
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="true"/>
+                                    <Condition Property="Selector.IsSelectionActive" Value="false"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" TargetName="Bd" Value="{DynamicResource WatcherUC_DefaultBg}"/>
+                                <Setter Property="BorderBrush" TargetName="Bd" Value="{DynamicResource WatcherUC_Selected_borderColor}"/>
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                <Setter Property="Opacity" TargetName="Bd" Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <ItemsPanelTemplate x:Key="ItemsPanelTemplate1">
+            <VirtualizingStackPanel IsItemsHost="True"/>
+        </ItemsPanelTemplate>
+        <Style x:Key="ControlStyle1" TargetType="{x:Type Control}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Control}">
+                        <Grid Background="#FF74FF00"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <DataTemplate x:Key="DataTemplate3forNews" d:DataType="local:ExpandoLWItemObject">
+            <Grid Height="Auto" Width="Auto">
+                <local:NItemUC HorizontalAlignment="Stretch" Margin="0" Width="Auto" Height="Auto"   Title="{Binding Title}" SubTitle="{Binding SubTitle}" FastLink="{Binding Link}" ContentText="{Binding PopupMessageString}" />
+            </Grid>
+        </DataTemplate>
+        <Style x:Key="ListBoxItemStyle2FORnEWS" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="Padding" Value="2,0,0,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border x:Name="Bd" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true" Background="#FF111111" Margin="4,2" BorderThickness="0,0,2,0" BorderBrush="#00B22A2A">
+                            <ContentPresenter x:Name="contentPresenter" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true"/>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="true"/>
+                                    <Condition Property="Selector.IsSelectionActive" Value="false"/>
+                                </MultiTrigger.Conditions>
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                <Setter Property="Opacity" TargetName="Bd" Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <DataTemplate x:Key="Collection1ItemTemplate">
+            <Grid Height="Auto">
+                <local:NItemUC Height="Auto" d:LayoutOverrides="Width, Height" FastLink="{Binding Link}" SubTitle="{Binding SubTitle}" Title="{Binding Title}" ContentText="{Binding PopupMessageString}" Foreground="White"/>
+            </Grid>
+        </DataTemplate>
+        <Style x:Key="newsListTemplate" TargetType="{x:Type ListBox}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource ListBorder}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBox}">
+                        <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="true">
+                            <ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}" Style="{DynamicResource simpleScrollerMiEdited}">
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </ScrollViewer>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsGrouping" Value="true"/>
+                                    <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="UIElement.MouseLeftButtonDown" SourceName="thumb">
+            <BeginStoryboard x:Name="miToggleTry1_BeginStoryboard" Storyboard="{StaticResource miToggleTry1}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard x:Name="miOff_BeginStoryboard" Storyboard="{StaticResource miOff}"/>
+            <BeginStoryboard x:Name="miOn_BeginStoryboard" Storyboard="{StaticResource miOn}"/>
+        </EventTrigger>
+    </Window.Triggers>
+    <Border BorderBrush="#FF161616" BorderThickness="1,0,1,1">
+        <Grid Background="#FF161616">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="278*"/>
+                <ColumnDefinition Width="527*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="54"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="DragArea2" Margin="0" Background="#002A87B2" Grid.ColumnSpan="2" DragOver="DragArea_DragOver" MouseLeftButtonDown="DragArea_MouseLeftButtonDown" PreviewMouseLeftButtonDown="DragArea_PreviewMouseLeftButtonDown" Grid.Row="1"/>
+
+            <Grid x:Name="window_Header" Margin="0" Background="#FF161616" Grid.ColumnSpan="2" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Height="30" MouseLeftButtonDown="window_Header_MouseLeftButtonDown">
+                <Grid x:Name="windowControls" HorizontalAlignment="Right" Margin="0" Width="84" Background="#00F56B6B" Height="30" VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="28"/>
+                        <ColumnDefinition Width="28"/>
+                        <ColumnDefinition Width="28"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid x:Name="close" Background="#00FBCDCD" Height="24" VerticalAlignment="Center" Grid.Column="2" Margin="0" Width="24" HorizontalAlignment="Center">
+                        <local:HIconButton x:Name="CloseWindowHIButt" Margin="0" Template="{DynamicResource HIconButtonControlTemplate1}" HoverColor="CornflowerBlue" Foreground="White" Click="CloseWindowHIButt_Click">
+                            <Custom:PackIconBootstrapIcons HorizontalAlignment="Center" Height="16" Margin="0" VerticalAlignment="Center" Width="16" Foreground="#FFECECEC" Kind="X"/>
+                        </local:HIconButton>
+                    </Grid>
+                    <Grid x:Name="max" Margin="0" Background="#00FBCDCD" Height="24" VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center" Width="24">
+                        <Image x:Name="image4" Margin="0" Source="media/from fbhd/maximize-24-white-diminished.png" Visibility="Hidden"/>
+                        <Custom:PackIconFontAwesome Height="16" Margin="0" VerticalAlignment="Center" Width="16" Foreground="#FFECECEC" Kind="WindowMaximizeRegular" HorizontalAlignment="Center" Visibility="Hidden"/>
+                        <local:HIconButton x:Name="maximizeHIButt_Copy" Margin="0" Template="{DynamicResource HIconButtonControlTemplate1}" HoverColor="CornflowerBlue" Foreground="White" Click="maximizeHIButt_Copy_Click">
+                            <Custom:PackIconFontAwesome Height="16" Margin="0" VerticalAlignment="Center" Width="16" Foreground="#FFECECEC" Kind="WindowMaximizeRegular" HorizontalAlignment="Center" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition"/>
+                        </local:HIconButton>
+                    </Grid>
+                    <Grid x:Name="minimize" Background="#00FBCDCD" Height="24" VerticalAlignment="Center" Margin="0" Width="24" HorizontalAlignment="Center">
+                        <Image x:Name="image3" Margin="0" Source="media/minimize-24px-white.svg.png" Visibility="Hidden"/>
+                        <Custom:PackIconFontAwesome Height="Auto" Margin="4,0,4,6" VerticalAlignment="Bottom" Width="16" Foreground="#FFECECEC" Kind="WindowMinimizeRegular" HorizontalAlignment="Center" Visibility="Hidden"/>
+                        <local:HIconButton x:Name="minimizeHIBUTT" Margin="0" Template="{DynamicResource HIconButtonControlTemplate1}" HoverColor="CornflowerBlue" Foreground="White" Click="minimizeHIBUTT_Click">
+                            <Custom:PackIconFontAwesome Height="Auto" Margin="4,0,4,6" VerticalAlignment="Bottom" Width="16" Foreground="#FFECECEC" Kind="WindowMinimizeRegular" HorizontalAlignment="Center" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition"/>
+                        </local:HIconButton>
+                    </Grid>
+                </Grid>
+                <Grid x:Name="secondaryControls" HorizontalAlignment="Left" Margin="0" Width="48" Height="30" VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="24"/>
+                        <ColumnDefinition Width="24"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid x:Name="settings" Background="#00FBCDCD" RenderTransformOrigin="0.542,0.375" VerticalAlignment="Center" d:LayoutOverrides="TopMargin, BottomMargin" Grid.Column="1" HorizontalAlignment="Center" Width="18" Height="18">
+                        <Image x:Name="image1" Margin="0" Source="media/notifications-off-24px-white-outlined.svg.png" Width="24" Height="24" Stretch="Fill" Visibility="Collapsed"/>
+                        <Custom:PackIconMaterial HorizontalAlignment="Center" Height="18" Margin="0" VerticalAlignment="Center" Width="18" Foreground="#FFE0E0E0" Kind="BellCheck"/>
+                    </Grid>
+                    <Grid x:Name="mute" Background="#00FBCDCD" RenderTransformOrigin="0.542,0.375" VerticalAlignment="Center" Margin="0" HorizontalAlignment="Center" Width="18" Height="18">
+                        <Image x:Name="image2" Margin="0" Source="media/settings-24px-white.svg.png" Width="24" Height="24" Stretch="Fill" Visibility="Collapsed"/>
+                        <Custom:PackIconMaterial HorizontalAlignment="Center" Height="18" Margin="0" VerticalAlignment="Center" Width="18" Foreground="#FFE0E0E0" Kind="Cog"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid x:Name="header1" Grid.ColumnSpan="2" Margin="0" Grid.Row="1">
+                <Grid x:Name="Logo" Margin="0,1,0,0" HorizontalAlignment="Left" Width="157">
+                    <Border x:Name="small_info" Margin="0,0,0,25" Background="#FFE64646" CornerRadius="50" Height="28" Width="28" HorizontalAlignment="Right" d:LayoutOverrides="Width" Visibility="Collapsed">
+                        <TextBlock x:Name="textBlock_Copy" TextWrapping="Wrap" Text="12" FontSize="18.667" TextOptions.TextFormattingMode="Display" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Tw Cen MT Condensed Extra Bold" Margin="0" Foreground="White"/>
+                    </Border>
+                    <Grid x:Name="logo" Margin="0,1,5,0" Background="#00CDCDCD">
+                        <TextBlock x:Name="textBlock" Margin="20,7,0,7" TextWrapping="Wrap" Text="CLW" FontSize="26.667" TextOptions.TextFormattingMode="Ideal" VerticalAlignment="Center" FontFamily="Tw Cen MT Condensed Extra Bold" Foreground="#FFFBFBFB" HorizontalAlignment="Left"/>
+                        <Custom:PackIconCodicons x:Name="interfaceIcon" Height="38" Margin="62.5,7,51.5,7" VerticalAlignment="Stretch" Width="Auto" Foreground="#FFFFFBFB" Kind="SymbolInterface" Loaded="PackIconCodicons_Loaded" SpinDuration="2" RenderTransformOrigin="5,4" HorizontalAlignment="Stretch">
+                            <Custom:PackIconCodicons.SpinEasingFunction>
+                                <SineEase EasingMode="EaseInOut"/>
+                            </Custom:PackIconCodicons.SpinEasingFunction>
+                        </Custom:PackIconCodicons>
+                        <Image x:Name="image10" Source="media/CL-EYE-LOGO.svg-64-30-BLACK-D40000-white-glow.png" Margin="15,6,75,7" Height="30" VerticalAlignment="Center" Visibility="Hidden"/>
+                    </Grid>
+                </Grid>
+                <Border x:Name="noticce" Margin="332,0,307,7" Background="#00000000" BorderThickness="1" BorderBrush="#00F7DA65" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="18" Padding="6,0" Visibility="Collapsed">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="16"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="textBlock10" TextWrapping="Wrap" Text="No Internet Connection! " TextOptions.TextFormattingMode="Display" VerticalAlignment="Center" Foreground="#FFF7CF2C" Margin="6,10,2,10" Grid.Column="1"/>
+                        <Custom:PackIconModern HorizontalAlignment="Center" Height="16" Margin="0" VerticalAlignment="Center" Width="16" Foreground="#FFFFD83B" Kind="WarningCircle"/>
+                    </Grid>
+                </Border>
+                <Border x:Name="primaryButton_Copy1" Margin="0,8,154,8" Background="{DynamicResource FocalPink}" HorizontalAlignment="Right" MouseLeftButtonDown="primaryButton_MouseLeftButtonDown" BorderBrush="#00890B0B" BorderThickness="1" CornerRadius="5" d:LayoutOverrides="Height" Visibility="Hidden">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="textBlock12" TextWrapping="Wrap" Text="Add Watcher" Foreground="White" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Margin="6,8" Grid.Column="1"/>
+                        <Custom:PackIconBootstrapIcons Height="22" VerticalAlignment="Center" Width="22" Foreground="#FFFFFBFB" Kind="PlusCircleFill" Margin="0" HorizontalAlignment="Right"/>
+                    </Grid>
+                </Border>
+                <Grid x:Name="miToggle" HorizontalAlignment="Left" Margin="202,10,0,10" Width="89" Background="#00000000" Visibility="Collapsed">
+                    <Rectangle x:Name="tracker" Margin="38,4,27,0" Stroke="{x:Null}" RadiusY="5" RadiusX="5" StrokeThickness="1.3" Height="10" VerticalAlignment="Top" Fill="#FF767676"/>
+                    <Ellipse x:Name="thumb" Height="15" Margin="0,1,27,0" Stroke="{x:Null}" StrokeThickness="1.3" VerticalAlignment="Top" Width="15" HorizontalAlignment="Right" d:LayoutOverrides="Width" Fill="#FFD1D1D1" RenderTransformOrigin="0.5,0.5">
+                        <Ellipse.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform X="-9"/>
+                            </TransformGroup>
+                        </Ellipse.RenderTransform>
+                    </Ellipse>
+                </Grid>
+                <Button x:Name="AddWatcherButton" HorizontalAlignment="Right" Margin="0,8,10,8" Width="150" Style="{DynamicResource MiMDLikeButton}" Click="loadListWatcherPresetButt_Click">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="textBlock7" TextWrapping="Wrap" Text="Add Watcher" Foreground="White" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Margin="6,8" Grid.Column="1"/>
+                        <Custom:PackIconBootstrapIcons Height="22" VerticalAlignment="Center" Width="22" Foreground="#FFFFFBFB" Kind="PlusCircleFill" Margin="0" HorizontalAlignment="Right"/>
+                    </Grid>
+                </Button>
+            </Grid>
+            <Button x:Name="devShowNotif" Content="Dev show notif" Click="devShowNotification_Click" Grid.Column="1" HorizontalAlignment="Left" Width="71" Grid.Row="1" Style="{DynamicResource SimpleButton}" BorderBrush="#00000000" Background="#00000000" Foreground="#00000000"/>
+            <Border x:Name="watcher_win" Margin="5,5,5,10" BorderThickness="1" BorderBrush="#FF424247" Background="#FF111111" Grid.Row="3" >
+                <Grid Margin="0">
+                    <StackPanel x:Name="watchersSection" Margin="0,27,0,0">
+                        <Grid x:Name="dark_model" Margin="4,4,4,1" Background="#FF1B1B1B" Height="58" Visibility="Collapsed">
+                            <Grid Height="48">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="54"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="1" Margin="0,2,58,2">
+                                    <TextBlock x:Name="textBlock4" Margin="0,0,0,-1" TextWrapping="Wrap" Text="FSDM Uploads" VerticalAlignment="Center" FontSize="14.667" Foreground="White" d:LayoutOverrides="Width" TextOptions.TextFormattingMode="Display"/>
+                                </Grid>
+                                <Grid Margin="6,0,0,0" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="32" Height="32">
+                                    <Image x:Name="image11" Margin="0" Width="32" Height="32" Source="media/facebook-icon-48.svg.png" HorizontalAlignment="Center" VerticalAlignment="Center" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+                                    <Border x:Name="small_info_Copy2" Margin="0,-12,-12,0" Background="White" CornerRadius="50" Width="20" HorizontalAlignment="Right" Height="20" VerticalAlignment="Top">
+                                        <TextBlock x:Name="textBlock_Copy3" TextWrapping="Wrap" Text="1" TextOptions.TextFormattingMode="Display" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Tw Cen MT Condensed Extra Bold" Margin="0" Foreground="Black"/>
+                                    </Border>
+                                </Grid>
+                                <Grid x:Name="state_set" Grid.Column="1" HorizontalAlignment="Left" Margin="0" Grid.Row="1" Height="17" VerticalAlignment="Top">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="20"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock x:Name="textBlock2_Copy6" Margin="0" TextWrapping="Wrap" Text="running" FontSize="13.333" Foreground="#FFB8FFAD" FontStyle="Italic" TextOptions.TextFormattingMode="Display"/>
+                                    <Custom:PackIconRemixIcon HorizontalAlignment="Center" Height="12" Margin="0" VerticalAlignment="Center" Width="12" Foreground="#FFB8FFAD" Kind="Loader3Fill" Spin="True" SpinDuration="2.5" Grid.Column="1"/>
+                                </Grid>
+                                <Image x:Name="image12" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,10,0" Width="32" Source="media/switche-on-32-15-white.png" Height="15" VerticalAlignment="Center" Grid.RowSpan="2" Visibility="Hidden"/>
+                                <Custom:PackIconBootstrapIcons x:Name="toggle" Grid.Column="1" HorizontalAlignment="Right" Height="24" Margin="0,0,10,0" VerticalAlignment="Center" Width="24" Foreground="White" Kind="Toggle2On" Grid.RowSpan="2" Background="#00000000"/>
+                                <ToggleButton x:Name="toggleButton_Copy" Content="ToggleButton" HorizontalAlignment="Right" Margin="0,11,17,-3" Width="24" Template="{DynamicResource ToggleButtonControlTemplate1}" Grid.Column="1" Grid.Row="1"/>
+                            </Grid>
+                        </Grid>
+                        <local:WatcherUC Height="58" Margin="4,2" Favico="media/facebook-icon-48.svg.png" Title="FSDM News" StateText="running" NewsCount="3" Visibility="Collapsed"/>
+                        <Grid x:Name="dark_model_Copy1" Margin="4,4,4,1" Background="#FF1B1B1B" Height="58" Visibility="Collapsed">
+                            <Grid Height="48">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="54"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="1" Margin="0,2,58,2">
+                                    <TextBlock x:Name="textBlock9" Margin="0,0,0,-1" TextWrapping="Wrap" Text="EXAMPLE 2" VerticalAlignment="Center" FontSize="14.667" Foreground="White" d:LayoutOverrides="Width" TextOptions.TextFormattingMode="Display"/>
+                                </Grid>
+                                <Grid Margin="6,0,0,0" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="32" Height="32" Background="White">
+                                    <Image x:Name="image20" Margin="0" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+                                    <Border x:Name="small_info_Copy6" Margin="0,-12,-12,0" Background="White" CornerRadius="50" Width="20" HorizontalAlignment="Right" Height="20" VerticalAlignment="Top" Visibility="Hidden">
+                                        <TextBlock x:Name="textBlock_Copy7" TextWrapping="Wrap" Text="1" TextOptions.TextFormattingMode="Display" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Tw Cen MT Condensed Extra Bold" Margin="0" Foreground="Black"/>
+                                    </Border>
+                                </Grid>
+                                <Custom:PackIconBootstrapIcons Grid.Column="1" HorizontalAlignment="Right" Height="24" Margin="0,12,10,12" VerticalAlignment="Center" Width="24" Foreground="White" Kind="Toggle2On" Grid.RowSpan="2"/>
+                                <Grid x:Name="state_set_Copy1" Grid.Column="1" HorizontalAlignment="Left" Margin="0" Grid.Row="1" Height="17" VerticalAlignment="Top">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="20"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock x:Name="textBlock2_Copy2" Margin="0" TextWrapping="Wrap" Text="running" FontSize="13.333" Foreground="#FFB8FFAD" FontStyle="Italic" TextOptions.TextFormattingMode="Display"/>
+                                    <Custom:PackIconRemixIcon HorizontalAlignment="Center" Height="12" Margin="0" VerticalAlignment="Center" Width="12" Foreground="#FFB8FFAD" Kind="Loader3Fill" Spin="True" SpinDuration="2.5" Grid.Column="1" Visibility="Collapsed"/>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <Grid x:Name="red_model_Copy1" Height="60" Margin="4,1" Background="#FFC83737" Visibility="Collapsed">
+                            <Grid Height="48">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="54"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="1" Margin="0,2,58,2">
+                                    <TextBlock x:Name="textBlock5" Margin="0,0,0,-1" TextWrapping="Wrap" Text="NAME" VerticalAlignment="Center" FontSize="14.667" Foreground="White" d:LayoutOverrides="Width"/>
+                                </Grid>
+                                <Grid Margin="6,0,0,0" Grid.RowSpan="2" HorizontalAlignment="Left" Width="32" Height="32">
+                                    <Image x:Name="image13" Margin="0" Width="32" Height="32" Source="media/facebook-icon-48.svg.png" HorizontalAlignment="Center" VerticalAlignment="Center" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+                                    <Border x:Name="small_info_Copy3" Margin="0,-12,-12,0" Background="White" CornerRadius="50" Width="20" HorizontalAlignment="Right" Height="20" VerticalAlignment="Top">
+                                        <TextBlock x:Name="textBlock_Copy4" TextWrapping="Wrap" Text="1" TextOptions.TextFormattingMode="Display" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Tw Cen MT Condensed Extra Bold" Margin="0" Foreground="Black"/>
+                                    </Border>
+                                </Grid>
+                                <TextBlock x:Name="textBlock2_Copy7" Grid.Column="1" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="state" VerticalAlignment="Top" FontSize="13.333" Grid.Row="1" Foreground="White" FontStyle="Italic"/>
+                                <Image x:Name="image14" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,10,0" Width="32" Source="media/switche-on-32-15-white.png" Height="15" VerticalAlignment="Center" Grid.RowSpan="2"/>
+                            </Grid>
+                        </Grid>
+                        <Grid x:Name="lightmodel" Height="60" Margin="4,1" Background="#FFFBCDCD" Visibility="Collapsed">
+                            <Grid Height="48">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="54"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="1" Margin="0,2,58,2">
+                                    <TextBlock x:Name="textBlock2" Margin="0,0,0,-1" TextWrapping="Wrap" Text="NAME" VerticalAlignment="Center" FontSize="14.667" Foreground="Black" d:LayoutOverrides="Width"/>
+                                </Grid>
+                                <Grid Margin="6,0,0,0" Grid.RowSpan="2" Width="32" Height="32" HorizontalAlignment="Left">
+                                    <Image x:Name="image6" Margin="0" Width="32" Height="32" Source="media/facebook-icon-48.svg.png" HorizontalAlignment="Center" VerticalAlignment="Center" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+                                    <Border x:Name="small_info_Copy" Margin="0,-12,-12,0" Background="#FFE64646" CornerRadius="50" Width="20" HorizontalAlignment="Right" Height="20" VerticalAlignment="Top">
+                                        <TextBlock x:Name="textBlock_Copy1" TextWrapping="Wrap" Text="1" TextOptions.TextFormattingMode="Display" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Tw Cen MT Condensed Extra Bold" Margin="0" Foreground="White"/>
+                                    </Border>
+                                </Grid>
+                                <TextBlock x:Name="textBlock2_Copy" Grid.Column="1" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="state" VerticalAlignment="Top" FontSize="13.333" Grid.Row="1" Foreground="#FF303030" FontStyle="Italic"/>
+                                <Image x:Name="image7" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,10,0" Width="32" Source="media/switche-on-32-15--red-pink.png" Height="15" VerticalAlignment="Center" Grid.RowSpan="2"/>
+                            </Grid>
+                        </Grid>
+                        <Grid x:Name="light_graymodel_Copy" Height="60" Margin="4,1" Background="#FFF3F3F3" Visibility="Collapsed">
+                            <Grid Height="48">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="54"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="1" Margin="0,2,58,2">
+                                    <TextBlock x:Name="textBlock3" Margin="0,0,0,-1" TextWrapping="Wrap" Text="NAME" VerticalAlignment="Center" FontSize="14.667" Foreground="Black" d:LayoutOverrides="Width"/>
+                                </Grid>
+                                <Grid Margin="6,0,0,0" Grid.RowSpan="2" HorizontalAlignment="Left" Width="32" Height="32">
+                                    <Image x:Name="image8" Margin="0" Width="32" Height="32" Source="media/facebook-icon-48.svg.png" HorizontalAlignment="Center" VerticalAlignment="Center" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+                                    <Border x:Name="small_info_Copy1" Margin="0,-12,-12,0" Background="#FFE64646" CornerRadius="50" Width="20" HorizontalAlignment="Right" Height="20" VerticalAlignment="Top">
+                                        <TextBlock x:Name="textBlock_Copy2" TextWrapping="Wrap" Text="1" TextOptions.TextFormattingMode="Display" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Tw Cen MT Condensed Extra Bold" Margin="0" Foreground="White"/>
+                                    </Border>
+                                </Grid>
+                                <TextBlock x:Name="textBlock2_Copy5" Grid.Column="1" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="state" VerticalAlignment="Top" FontSize="13.333" Grid.Row="1" Foreground="#FF303030" FontStyle="Italic"/>
+                                <Image x:Name="image9" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,10,0" Width="32" Source="media/switche-on-32-15--red-pink.png" Height="15" VerticalAlignment="Center" Grid.RowSpan="2"/>
+                            </Grid>
+                        </Grid>
+                        <Grid x:Name="light_graymodel_Copy1" Height="60" Margin="4,1" Background="#FFF3F3F3" Visibility="Collapsed">
+                            <Grid Height="48">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="54"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="1" Margin="0,2,58,2">
+                                    <TextBlock x:Name="textBlock8" Margin="0,0,0,-1" TextWrapping="Wrap" Text="NAME" VerticalAlignment="Center" FontSize="14.667" Foreground="Black" d:LayoutOverrides="Width"/>
+                                </Grid>
+                                <Grid Margin="6,0,0,0" Grid.RowSpan="2" HorizontalAlignment="Left" Width="32" Height="32">
+                                    <Image x:Name="image18" Margin="0" Width="32" Height="32" Source="media/facebook-icon-48.svg.png" HorizontalAlignment="Center" VerticalAlignment="Center" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+                                    <Border x:Name="small_info_Copy5" Margin="0,-12,-12,0" Background="#FFE64646" CornerRadius="50" Width="20" HorizontalAlignment="Right" Height="20" VerticalAlignment="Top">
+                                        <TextBlock x:Name="textBlock_Copy6" TextWrapping="Wrap" Text="1" TextOptions.TextFormattingMode="Display" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Tw Cen MT Condensed Extra Bold" Margin="0" Foreground="White"/>
+                                    </Border>
+                                </Grid>
+                                <TextBlock x:Name="textBlock2_Copy9" Grid.Column="1" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="state" VerticalAlignment="Top" FontSize="13.333" Grid.Row="1" Foreground="#FF303030" FontStyle="Italic"/>
+                                <Image x:Name="image19" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,10,0" Width="32" Source="media/switche-on-32-15--red-pink.png" Height="15" VerticalAlignment="Center" Grid.RowSpan="2"/>
+                            </Grid>
+                        </Grid>
+                        <Grid Height="60" Background="#FFFBCDCD" Margin="4,5" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition" Visibility="Collapsed"/>
+                        <local:WatcherUC Height="58" Margin="4,2" Favico="media/angular-icon-1.svg.png" Title="EXAMPLE" Visibility="Collapsed"/>
+                        <local:WatcherUC Margin="4,2" Favico="media/websitesExamples/USMBA-256.jpg" Title="EXAMPLE 2" Height="58" Background="#FFA44444" Visibility="Collapsed"/>
+                    </StackPanel>
+                    <Grid Height="24" Margin="0" VerticalAlignment="Top" Background="#FF1A1A1D">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="242*"/>
+                            <ColumnDefinition Width="27*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="textBlock6" HorizontalAlignment="Left" Margin="4,4.5,0,4.5" TextWrapping="Wrap" Text="Watchers" Width="53" Foreground="#FF9B9B9B" VerticalAlignment="Center"/>
+                        <Image x:Name="image15" Grid.Column="1" Margin="0" Source="media/expand-more-left-5-8px-white-compact.svg.png" Width="5" Height="8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                    <ListBox x:Name="listBox" Background="Transparent" Foreground="White" ItemTemplate="{DynamicResource DataTemplate2}" VerticalContentAlignment="Top" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" ItemsPanel="{DynamicResource ItemsPanelTemplate1}" BorderThickness="0" FocusVisualStyle="{DynamicResource ControlStyle1}" d:DataContext="{d:DesignData /SampleData/SessionSampleData.xaml}" ItemsSource="{Binding CustomListWatchers}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" Padding="0" Margin="0,29,0,0" Style="{DynamicResource ListBoxMiEdited}"/>
+                </Grid>
+            </Border>
+            <Border x:Name="news_window" Margin="0,5,5,10" BorderThickness="1" BorderBrush="#FF424247" Background="#FF111111" Grid.Row="3" Grid.Column="1" >
+                <Grid Margin="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="38"/>
+                    </Grid.RowDefinitions>
+                    <Grid x:Name="header" Margin="0" Background="#FF1A1A1D" Height="24">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="24"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="textBlock20" HorizontalAlignment="Left" Margin="4,4.5,0,4.5" TextWrapping="Wrap" Text="FSDM News" Foreground="#FF9B9B9B" VerticalAlignment="Center"/>
+                        <Image x:Name="image40" Grid.Column="1" Margin="0" Source="media/from fbhd/3dots-vertical-16-white.png" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.7" Visibility="Hidden"/>
+                        <Custom:PackIconBootstrapIcons HorizontalAlignment="Center" Height="14" Margin="0" VerticalAlignment="Center" Width="14" Foreground="White" Kind="ThreeDots" Grid.Column="1"/>
+                    </Grid>
+                    <StackPanel x:Name="news_section_Copy" Background="#FF111111" Margin="0" d:IsHidden="True" Visibility="Collapsed" Grid.Row="1">
+                        <local:NItemUC Margin="16,0" Background="#00000000"/>
+                        <Border x:Name="new_model_Copy1" Background="#000A0B0D" Margin="16,4" BorderBrush="#FF27282C" BorderThickness="0,0,0,1" MinHeight="109" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition" Visibility="Collapsed">
+                            <Grid MinHeight="108">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="68"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="22"/>
+                                    <RowDefinition Height="28"/>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock x:Name="textBlock2_Copy19" HorizontalAlignment="Left" TextWrapping="Wrap" Text="TITLE" VerticalAlignment="Top" FontSize="16" Foreground="Gainsboro" FontWeight="Bold" Margin="5,0,0,0"/>
+                                <TextBlock x:Name="textBlock2_Copy20" HorizontalAlignment="Left" TextWrapping="Wrap" Text="SUB TITLE" FontSize="14.667" Foreground="#FFD1D1D1" VerticalAlignment="Top" Margin="5,0,0,0" Grid.Row="1"/>
+                                <TextBlock x:Name="textBlock2_Copy21" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Optional content: Modern UI text gets right to the point, using progressive disclosure as needed for more detail. By contrast, classic UI text tends to overexplain, often using large blocks of unformatted text." VerticalAlignment="Top" FontSize="13.333" Foreground="#FFBBBABA" Margin="15,0,0,0" Grid.Row="2" MaxHeight="18" TextTrimming="WordEllipsis"/>
+                                <TextBlock x:Name="textBlock2_Copy22" HorizontalAlignment="Left" TextWrapping="Wrap" Text="https://website.com/abc" VerticalAlignment="Top" FontSize="13.333" Foreground="#FF23A5FF" Margin="5,0,0,0" Grid.Row="3"/>
+                                <Grid x:Name="primaryButton_Copy4" Margin="0" Background="#FF007ACC" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden">
+                                    <TextBlock x:Name="textBlock14" Margin="6,4" TextWrapping="Wrap" Text="Download" Foreground="White" FontSize="14.667" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Grid>
+                                <Grid x:Name="controlss_Copy" Margin="10,0" Grid.RowSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="80" Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="162*"/>
+                                        <RowDefinition Height="100*"/>
+                                    </Grid.RowDefinitions>
+                                    <Border x:Name="primaryDownload1" Margin="0" Background="#FF161616" HorizontalAlignment="Center" VerticalAlignment="Center" Width="48" Height="48" BorderBrush="#00212125" BorderThickness="1" CornerRadius="100">
+                                        <Custom:PackIconFontAwesome HorizontalAlignment="Center" Height="18" Margin="0" VerticalAlignment="Center" Width="18" Foreground="White" Kind="DownloadSolid"/>
+                                    </Border>
+                                    <Border x:Name="secondary_markasread1" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" BorderThickness="1" CornerRadius="100" Grid.Row="1" Background="#FF161616" BorderBrush="#00212125">
+                                        <Custom:PackIconMaterial HorizontalAlignment="Center" Height="16" Margin="0" VerticalAlignment="Center" Width="16" Foreground="White" Kind="EyeCheck"/>
+                                    </Border>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <local:NItemUC Margin="16,0"/>
+                    </StackPanel>
+                    <ListBox x:Name="NewsList" Background="Transparent" Foreground="White" ItemTemplate="{DynamicResource Collection1ItemTemplate}" VerticalContentAlignment="Top" ItemContainerStyle="{DynamicResource ListBoxItemStyle2FORnEWS}" ItemsPanel="{DynamicResource ItemsPanelTemplate1}" BorderThickness="0" FocusVisualStyle="{DynamicResource ControlStyle1}" d:DataContext="{d:DesignData /SampleData/SelectedCustomLWSampleData.xaml}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" Padding="0" Margin="0" ItemsSource="{Binding UnreadNews}" Grid.Row="1" Style="{DynamicResource newsListTemplate}" DataContext="{Binding SelectedItem, ElementName=listBox}"/>
+                    <Grid x:Name="footer_Copy" Margin="0" Background="#FF111111" Grid.Row="2" Height="38">
+                        <Grid x:Name="primaryButton_Copy5" VerticalAlignment="Center" d:LayoutOverrides="Width" HorizontalAlignment="Right" Margin="0,0,10,0" Background="#00004878">
+                            <TextBlock x:Name="textBlock15" Margin="8,4" TextWrapping="Wrap" Text="Archive all" Foreground="White" FontSize="14.667" HorizontalAlignment="Center" VerticalAlignment="Center" TextOptions.TextFormattingMode="Ideal"/>
+                        </Grid>
+                        <Grid x:Name="primaryButton_Copy" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,5,100,5" Background="#00004878">
+                            <TextBlock x:Name="textBlock11" Margin="8,4" TextWrapping="Wrap" Text="Download all" Foreground="White" FontSize="14.667" HorizontalAlignment="Center" VerticalAlignment="Center" TextOptions.TextFormattingMode="Ideal"/>
+                        </Grid>
+                        <Path Data="M427.375,3.1386719 L427.125,35.125266" Fill="#FFF4F4F5" HorizontalAlignment="Right" Margin="0,6,96.75,6" Stretch="Fill" Stroke="#FF393942" UseLayoutRounding="False" Width="1" Height="26" VerticalAlignment="Center"/>
+                    </Grid>
+                </Grid>
+            </Border>
+            <Custom:PackIconBootstrapIcons Grid.Column="1" Height="Auto" Margin="76,10,0,10" Grid.Row="1" VerticalAlignment="Stretch" Width="88" Foreground="White"/>
+            <Grid x:Name="ResizeHandle" Grid.Column="1" HorizontalAlignment="Right" Height="4" Margin="0" Grid.Row="3" VerticalAlignment="Bottom" Width="40" Background="#FF938989" MouseLeftButtonDown="ResizeHandle_MouseLeftButtonDown" Visibility="Hidden"/>
+
+        </Grid>
+    </Border>
+</Window>

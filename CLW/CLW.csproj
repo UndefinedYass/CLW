@@ -1,0 +1,716 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EF2F4C1E-E905-4B8B-B30B-5EA457CF3112}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CLW</RootNamespace>
+    <AssemblyName>CLW</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>red-eye-transp.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MahApps.Metro.IconPacks, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.BootstrapIcons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.BootstrapIcons.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.BoxIcons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.BoxIcons.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Codicons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.Codicons.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Entypo, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.Entypo.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.EvaIcons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.EvaIcons.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.FeatherIcons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.FeatherIcons.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.FileIcons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.FileIcons.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Fontaudio, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.Fontaudio.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.FontAwesome, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.FontAwesome.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.ForkAwesome, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.ForkAwesome.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Ionicons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.Ionicons.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.JamIcons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.JamIcons.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Material, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.Material.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.MaterialDesign, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.MaterialDesign.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.MaterialLight, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.MaterialLight.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Microns, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.Microns.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Modern, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.Modern.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Octicons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.Octicons.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.PicolIcons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.PicolIcons.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.PixelartIcons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.PixelartIcons.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.RadixIcons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.RadixIcons.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.RemixIcon, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.RemixIcon.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.RPGAwesome, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.RPGAwesome.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.SimpleIcons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.SimpleIcons.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Typicons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.Typicons.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Unicons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.Unicons.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.VaadinIcons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.VaadinIcons.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.WeatherIcons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.WeatherIcons.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Zondicons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.Zondicons.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ookii.Dialogs.Wpf, Version=3.0.0.0, Culture=neutral, PublicKeyToken=66aa232afad40158, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ookii.Dialogs.Wpf.3.1.0\lib\net45\Ookii.Dialogs.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="CLW.cs" />
+    <Compile Include="CLWNotifWindow.xaml.cs">
+      <DependentUpon>CLWNotifWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fucs.cs" />
+    <Compile Include="HIconButton.cs" />
+    <Compile Include="SampleData\DummyNotificationWindowData\DummyNotificationWindowData.xaml.cs">
+      <DependentUpon>DummyNotificationWindowData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SampleData\watchersSample\watchersSample.xaml.cs">
+      <DependentUpon>watchersSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WatcherUC.xaml.cs">
+      <DependentUpon>WatcherUC.xaml</DependentUpon>
+    </Compile>
+    <Page Include="CLWNotifWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IconButtonMi.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="NItemUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SampleData\DummyNotificationWindowData\DummyNotificationWindowData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </DesignTimeOnly>
+    <DesignData Include="SampleData\SessionSampleData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </DesignData>
+    <DesignData Include="SampleData\SelectedCustomLWSampleData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </DesignData>
+    <Page Include="Simple Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WatcherUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="NItemUC.xaml.cs">
+      <DependentUpon>NItemUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="curl\curl-ca-bundle.crt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="curl\Nouveau CMD by yass.yassCmd" />
+    <None Include="media\from fbhd\24px.svg" />
+    <None Include="media\from fbhd\drawing.svg" />
+    <None Include="media\from fbhd\drawings-codde-logo.svg" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="release-notes.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="SampleData\DummyNotificationWindowData\DummyNotificationWindowData.xsd" />
+    <None Include="SampleData\watchersSample\watchersSample.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\from fbhd\32-down-white-line.png" />
+    <Resource Include="media\from fbhd\32-down-white.png" />
+    <Resource Include="media\from fbhd\32-white-loader-thick.png" />
+    <Resource Include="media\from fbhd\32-white-loader-thick2.png" />
+    <Resource Include="media\from fbhd\32-white-loader.png" />
+    <Resource Include="media\from fbhd\3dots-16-white %282%29.png" />
+    <Resource Include="media\from fbhd\3dots-16-white.png" />
+    <Resource Include="media\from fbhd\3dots-browse-squares-16-white.png" />
+    <Resource Include="media\from fbhd\3dots-vertical-16-white.png" />
+    <Resource Include="media\from fbhd\add-list-item-thick-16-white-green.png" />
+    <Resource Include="media\from fbhd\add-task-16-white-green.png" />
+    <Resource Include="media\from fbhd\add-task-detailed-16-white-green.png" />
+    <Resource Include="media\from fbhd\add-task-thick-16-white-green.png" />
+    <Resource Include="media\from fbhd\add-user-48 - Copy.png" />
+    <Resource Include="media\from fbhd\alert-32 %281%29.png" />
+    <Resource Include="media\from fbhd\arow-down-blue-mi-7x7.png" />
+    <Resource Include="media\from fbhd\arow-down-white-mi-7x7.png" />
+    <Resource Include="media\from fbhd\arow8-16--16.png" />
+    <Resource Include="media\from fbhd\arrow-90-16 %284%29.png" />
+    <Resource Include="media\from fbhd\bell-16-orange-empty-shine %282%29.png" />
+    <Resource Include="media\from fbhd\bell-16-orange-empty-shine.png" />
+    <Resource Include="media\from fbhd\bell-16-orange-filled %282%29.png" />
+    <Resource Include="media\from fbhd\bell-16-orange-filled.png" />
+    <Resource Include="media\from fbhd\bell-16-white-empty-shine %282%29.png" />
+    <Resource Include="media\from fbhd\bell-16-white-empty-shine.png" />
+    <Resource Include="media\from fbhd\bell-16-white-empty.png" />
+    <Resource Include="media\from fbhd\bell-16-white-filled-perfect.png" />
+    <Resource Include="media\from fbhd\blank-file-4-16 %281%29.png" />
+    <Resource Include="media\from fbhd\blank-file-4-16 %282%29-bright-snaped-list.png" />
+    <Resource Include="media\from fbhd\blank-file-4-16 %282%29-bright-snaped-plus.png" />
+    <Resource Include="media\from fbhd\blank-file-4-16 %282%29-bright-snaped-plus2.png" />
+    <Resource Include="media\from fbhd\blank-file-4-16 %282%29-bright-snaped-small.png" />
+    <Resource Include="media\from fbhd\blank-file-4-16 %282%29-bright-snaped.png" />
+    <Resource Include="media\from fbhd\blank-file-4-16 %282%29-bright.png" />
+    <Resource Include="media\from fbhd\blank-file-4-16 %282%29.png" />
+    <Resource Include="media\from fbhd\blue-transparent-bck-white-outline-233x121 -2.png" />
+    <Resource Include="media\from fbhd\blue-transparent-bck-white-outline-233x121.png" />
+    <Resource Include="media\from fbhd\calend-16-white.png" />
+    <Resource Include="media\from fbhd\chec2.png" />
+    <Resource Include="media\from fbhd\chec3.png" />
+    <Resource Include="media\from fbhd\check-16-aqagreen.png" />
+    <Resource Include="media\from fbhd\check-32-aqagreen .png" />
+    <Resource Include="media\from fbhd\check-32-aqagreen.png" />
+    <Resource Include="media\from fbhd\check-32-aqagreen2.png" />
+    <Resource Include="media\from fbhd\check-32-aqagreen3.png" />
+    <Resource Include="media\from fbhd\CLW-ICO.ico" />
+    <Resource Include="media\from fbhd\CLW-PARSER.ico" />
+    <Resource Include="media\from fbhd\code-in-square-16-white-small.png" />
+    <Resource Include="media\from fbhd\console-16-white.png" />
+    <Resource Include="media\from fbhd\copy-16-white-A-shifted.png" />
+    <Resource Include="media\from fbhd\copy-16-white-commandline.png" />
+    <Resource Include="media\from fbhd\copy-16-white-T.png" />
+    <Resource Include="media\from fbhd\copy-16-white-V.png" />
+    <Resource Include="media\from fbhd\copy-16-white.png" />
+    <Resource Include="media\from fbhd\copy-fancy-16-whte-big.png" />
+    <Resource Include="media\from fbhd\delete-16-white.png" />
+    <Resource Include="media\from fbhd\delete-all-16-white.png" />
+    <Resource Include="media\from fbhd\dload-all-thin-16-white-yellow.png" />
+    <Resource Include="media\from fbhd\dload-thin-16-white.png" />
+    <Resource Include="media\from fbhd\down-16-white.png" />
+    <Resource Include="media\from fbhd\down-small-11-turns-green.png" />
+    <Resource Include="media\from fbhd\down-small-11-turns-white.png" />
+    <Resource Include="media\from fbhd\down-small-6.png" />
+    <Resource Include="media\from fbhd\down-small-7.png" />
+    <Resource Include="media\from fbhd\down-tri-10x8-orange %282%29.png" />
+    <Resource Include="media\from fbhd\down-tri-10x8-orange.png" />
+    <Resource Include="media\from fbhd\down-tri-10x8-white %282%29.png" />
+    <Resource Include="media\from fbhd\down-tri-10x8-white.png" />
+    <Resource Include="media\from fbhd\downloading-10-1.png" />
+    <Resource Include="media\from fbhd\elet-14-grey-filled-mi.png" />
+    <Resource Include="media\from fbhd\elet-16-grey-mi.png" />
+    <Resource Include="media\from fbhd\elet-16-white-mi.png" />
+    <Resource Include="media\from fbhd\enter-grey14-14.png" />
+    <Resource Include="media\from fbhd\enter-white-14-14.png" />
+    <Resource Include="media\from fbhd\error1.png" />
+    <Resource Include="media\from fbhd\eye-16-white-small.png" />
+    <Resource Include="media\from fbhd\eye-smouth-16-white %282%29.png" />
+    <Resource Include="media\from fbhd\eye-smouth-16-white.png" />
+    <Resource Include="media\from fbhd\FB-ICO.ico" />
+    <Resource Include="media\from fbhd\filter-16-white-shiny.png" />
+    <Resource Include="media\from fbhd\filter-add-16-white.png" />
+    <Resource Include="media\from fbhd\flesh-white-14-14.png" />
+    <Resource Include="media\from fbhd\folder-16-16.png" />
+    <Resource Include="media\from fbhd\folder-16-white.png" />
+    <Resource Include="media\from fbhd\folder-open-property-16-white-cyan.png" />
+    <Resource Include="media\from fbhd\image-16-16.png" />
+    <Resource Include="media\from fbhd\image-16-small.png" />
+    <Resource Include="media\from fbhd\image-32-white-2-square.png" />
+    <Resource Include="media\from fbhd\Image1.png" />
+    <Resource Include="media\from fbhd\Image2.png" />
+    <Resource Include="media\from fbhd\Image3.png" />
+    <Resource Include="media\from fbhd\information-b-on-w-13-large %282%29.png" />
+    <Resource Include="media\from fbhd\information-b-on-w-13-large.png" />
+    <Resource Include="media\from fbhd\jpg-cool-office.png" />
+    <Resource Include="media\from fbhd\lines - Copy.png" />
+    <Resource Include="media\from fbhd\lines-rubby.png" />
+    <Resource Include="media\from fbhd\loader-w-yass-panel.gif" />
+    <Resource Include="media\from fbhd\Mi-logo-blackbg-lessglow-nostroke-200x158.png" />
+    <Resource Include="media\from fbhd\Mi-logo-blue-flow-200x158.bmp" />
+    <Resource Include="media\from fbhd\Mi-logo-blue-flow-200x158.png" />
+    <Resource Include="media\from fbhd\Mi-logo-blue-flow-232x180.png" />
+    <Resource Include="media\from fbhd\Mi-logo-blue-lessglow-nostroke-200x158.png" />
+    <Resource Include="media\from fbhd\Mi-logo-blue-no-backg-199x199.png" />
+    <Resource Include="media\from fbhd\mi-logo-blue-transparent-bck.png" />
+    <Resource Include="media\from fbhd\Mi-logo-orange-no-backg-199x199.png" />
+    <Resource Include="media\from fbhd\Mi-logo-orange-sblackbg-lessglow-nostroke-200x158.png" />
+    <Resource Include="media\from fbhd\mi-simple-xml-16-white.png" />
+    <Resource Include="media\from fbhd\minus-16-white %282%29.png" />
+    <Resource Include="media\from fbhd\minus-16-white.png" />
+    <Resource Include="media\from fbhd\mkvcool-white-office.png" />
+    <Resource Include="media\from fbhd\mp3-20-2-16.bmp" />
+    <Resource Include="media\from fbhd\mp3-20-2.gif" />
+    <Resource Include="media\from fbhd\mp3-20-2.png" />
+    <Resource Include="media\from fbhd\mp3-20.png" />
+    <Resource Include="media\from fbhd\mp3-cool-yellow.png" />
+    <Resource Include="media\from fbhd\mp3-orange-large.png" />
+    <Resource Include="media\from fbhd\mp3-orange.png" />
+    <Resource Include="media\from fbhd\mp3latg.bmp" />
+    <Resource Include="media\from fbhd\mp3latg.png" />
+    <Resource Include="media\from fbhd\mp3latg2.png" />
+    <Resource Include="media\from fbhd\mp3latg3.png" />
+    <Resource Include="media\from fbhd\mp4-cool-magenta-ofiice - Copy.png" />
+    <Resource Include="media\from fbhd\mp4-cool-magenta-ofiice.png" />
+    <Resource Include="media\from fbhd\mp4-cool-magenta.bmp" />
+    <Resource Include="media\from fbhd\mp4-cool-magenta.png" />
+    <Resource Include="media\from fbhd\mp4-cool.png" />
+    <Resource Include="media\from fbhd\music-snaped.png" />
+    <Resource Include="media\from fbhd\new-bell-filled-16-white-green.png" />
+    <Resource Include="media\from fbhd\new-item-16-white-thick-smaller.png" />
+    <Resource Include="media\from fbhd\new-item-16-white-thick.png" />
+    <Resource Include="media\from fbhd\new-task-lite-16-white %282%29.png" />
+    <Resource Include="media\from fbhd\new-task-lite-16-white.png" />
+    <Resource Include="media\from fbhd\parse-16-white-blue.png" />
+    <Resource Include="media\from fbhd\parse-all-16-white-blue-yellow.png" />
+    <Resource Include="media\from fbhd\parse_code16.png" />
+    <Resource Include="media\from fbhd\pause-bell-filled-16-white-firebrick.png" />
+    <Resource Include="media\from fbhd\pause16white-perfect.png" />
+    <Resource Include="media\from fbhd\pin-2-13BRIGHT-blue.png" />
+    <Resource Include="media\from fbhd\pin-2-13BRIGHT-orange.png" />
+    <Resource Include="media\from fbhd\pin-2-13BRIGHT.png" />
+    <Resource Include="media\from fbhd\pin-2-16BRIGHT.png" />
+    <Resource Include="media\from fbhd\play-in-circle-white-16-larger.png" />
+    <Resource Include="media\from fbhd\plus-thick-16-white.png" />
+    <Resource Include="media\from fbhd\power-white2.png" />
+    <Resource Include="media\from fbhd\redx-16-red.png" />
+    <Resource Include="media\from fbhd\redx-16-red2.png" />
+    <Resource Include="media\from fbhd\redx-blue.png" />
+    <Resource Include="media\from fbhd\regex-blueStar-16.png" />
+    <Resource Include="media\from fbhd\resloving-gray-10-10.png" />
+    <Resource Include="media\from fbhd\save-16-white.png" />
+    <Resource Include="media\from fbhd\search-13-white.png" />
+    <Resource Include="media\from fbhd\search-in-square-16-white.png" />
+    <Resource Include="media\from fbhd\search-in-square-16-white2.png" />
+    <Resource Include="media\from fbhd\sett-2.png" />
+    <Resource Include="media\from fbhd\sett16-b.png" />
+    <Resource Include="media\from fbhd\sett16.png" />
+    <Resource Include="media\from fbhd\skip-white-14-14.png" />
+    <Resource Include="media\from fbhd\SplashScreen1.png" />
+    <Resource Include="media\from fbhd\star-14-grey-filled-mi.png" />
+    <Resource Include="media\from fbhd\start-16-white-vs-like.png" />
+    <Resource Include="media\from fbhd\start-bell-filled-16-white-cyan.png" />
+    <Resource Include="media\from fbhd\start-perfect-white-16-black-bck.png" />
+    <Resource Include="media\from fbhd\start-white.png" />
+    <Resource Include="media\from fbhd\start16-white2.png" />
+    <Resource Include="media\from fbhd\stop-bell-filled-16-white-lightred.png" />
+    <Resource Include="media\from fbhd\up-tri-10x8-orange %282%29.png" />
+    <Resource Include="media\from fbhd\up-tri-10x8-orange.png" />
+    <Resource Include="media\from fbhd\up-tri-10x8-white %282%29.png" />
+    <Resource Include="media\from fbhd\up-tri-10x8-white.png" />
+    <Resource Include="media\from fbhd\video-16-medium.png" />
+    <Resource Include="media\from fbhd\video-16-small.png" />
+    <Resource Include="media\from fbhd\video-16-white.png" />
+    <Resource Include="media\from fbhd\video-32-white-rect.png" />
+    <Resource Include="media\from fbhd\video-32.png" />
+    <Resource Include="media\from fbhd\video-48-white.png" />
+    <Resource Include="media\from fbhd\watch-16-white-shifted.png" />
+    <Resource Include="media\from fbhd\wav-16-white.png" />
+    <Resource Include="media\from fbhd\wav-32-white-sharp.png" />
+    <Resource Include="media\from fbhd\window-bell-filled-16-white-white.png" />
+    <Resource Include="media\from fbhd\x-16-white.png" />
+    <Resource Include="media\from fbhd\x-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\from fbhd\search-13-black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\from fbhd\search-16-red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\from fbhd\search-16-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\from fbhd\bell-24-white-empty.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\search-24px-white.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\settings-24px-red-pink.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\settings-24px-white.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\notifications_off-24px-c83737.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\notifications-24px-white.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\notifications-24px-c83737.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\notifications-24px-aa0000.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\notifications_off-24px-white.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\search-16px-aa0000.svg.png" />
+    <Resource Include="media\search-16px-c83737.svg.png" />
+    <Resource Include="media\search-16px-ff6600.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\search-16px-white.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\settings-24px-aa0000.svg.png" />
+    <Resource Include="media\settings-24px-c83737.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\minimize-24px-5367c6.svg.png" />
+    <Resource Include="media\minimize-24px-aa0000.svg.png" />
+    <Resource Include="media\minimize-24px-c83737.svg.png" />
+    <Resource Include="media\minimize-24px-gray20.svg.png" />
+    <Resource Include="media\minimize-24px-gray80.svg.png" />
+    <Resource Include="media\minimize-24px-gray90.svg.png" />
+    <Resource Include="media\minimize-24px-white.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\maximize-24px-aa0000.svg.png" />
+    <Resource Include="media\maximize-24px-c83737.svg.png" />
+    <Resource Include="media\maximize-24px-white.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\clode-24px-white.svg.png" />
+    <Resource Include="media\close-24px-aa0000.svg.png" />
+    <Resource Include="media\close-24px-c83737.svg.png" />
+    <Resource Include="media\close-24px-white.svg.png" />
+    <Resource Include="media\delete-24px-aa0000.svg.png" />
+    <Resource Include="media\delete-24px-c83737.svg.png" />
+    <Resource Include="media\delete-24px-gray30.svg.png" />
+    <Resource Include="media\delete-24px-white.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\from fbhd\maximize-24-white-augmented.png" />
+    <Resource Include="media\from fbhd\maximize-24-white-diminished.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\facebook-icon-48.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\switche-on-32-15--red-pink.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\switche-on-32-15-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\CL-EYE-LOGO.svg-64-30-BLACK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\CL-EYE-LOGO.svg-64-30-BLACK-A02C2C.png" />
+    <Resource Include="media\CL-EYE-LOGO.svg-64-30-BLACK-AA0000.png" />
+    <Resource Include="media\CL-EYE-LOGO.svg-64-30-BLACK-D40000.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\CL-EYE-LOGO.svg-64-30-BLACK-D40000-yellow-glow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\CL-EYE-LOGO.svg-64-30-BLACK-D40000-red-glow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\CL-EYE-LOGO.svg-64-30-BLACK-D40000-white-glow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\expand-more-down-16px-aa00.svg.png" />
+    <Resource Include="media\expand-more-down-16px-black.svg.png" />
+    <Resource Include="media\expand-more-down-16px-c837.svg.png" />
+    <Resource Include="media\expand-more-down-16px-white.svg.png" />
+    <Resource Include="media\expand-more-left-16px-aa00.svg.png" />
+    <Resource Include="media\expand-more-left-16px-black.svg.png" />
+    <Resource Include="media\expand-more-left-16px-c837.svg.png" />
+    <Resource Include="media\expand-more-left-16px-white.svg.png" />
+    <Resource Include="media\expand-more-left-5-8px-aa00-compact.svg.png" />
+    <Resource Include="media\expand-more-left-5-8px-black-compact.svg.png" />
+    <Resource Include="media\expand-more-left-5-8px-c837-compact.svg.png" />
+    <Resource Include="media\expand-more-left-5-8px-white-compact.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\notifications-off-24px-55d400-outlined.svg.png" />
+    <Resource Include="media\notifications-off-24px-73abc8-outlined.svg.png" />
+    <Resource Include="media\notifications-off-24px-aa00-outlined.svg.png" />
+    <Resource Include="media\notifications-off-24px-black-outlined.svg.png" />
+    <Resource Include="media\notifications-off-24px-fc0-outlined.svg.png" />
+    <Resource Include="media\notifications-off-24px-gray30-outlined.svg.png" />
+    <Resource Include="media\notifications-off-24px-white-outlined.svg.png" />
+    <Resource Include="media\notifications_active-24px-00d400-outlined.svg.png" />
+    <Resource Include="media\notifications_active-24px-37abc8-outlined.svg.png" />
+    <Resource Include="media\notifications_active-24px-4a0-outlined.svg.png" />
+    <Resource Include="media\notifications_active-24px-55d400-outlined.svg.png" />
+    <Resource Include="media\notifications_active-24px-aa00-c837.svg.png" />
+    <Resource Include="media\notifications_active-24px-aa00-fc0.svg.png" />
+    <Resource Include="media\notifications_active-24px-aa00-outlined.svg.png" />
+    <Resource Include="media\notifications_active-24px-fc0-outlined.svg.png" />
+    <Resource Include="media\notifications_active-24px-white-outlined.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\download-24px-0066ff.svg.png" />
+    <Resource Include="media\download-24px-0088aa.svg.png" />
+    <Resource Include="media\download-24px-00aa00.svg.png" />
+    <Resource Include="media\download-24px-00aad4.svg.png" />
+    <Resource Include="media\download-24px-2c2ca0.svg.png" />
+    <Resource Include="media\download-24px-37c837.svg.png" />
+    <Resource Include="media\download-24px-aa00.svg.png" />
+    <Resource Include="media\download-24px-c837.svg.png" />
+    <Resource Include="media\download-24px-ff6600.svg.png" />
+    <Resource Include="media\download-24px-gray30.svg.png" />
+    <Resource Include="media\download-24px-white.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\warning-18px-aa00.svg.png" />
+    <Resource Include="media\warning-18px-c837.svg.png" />
+    <Resource Include="media\warning-18px-d400.svg.png" />
+    <Resource Include="media\warning-18px-ff6600.svg.png" />
+    <Resource Include="media\warning-18px-ffcc00.svg.png" />
+    <Resource Include="media\warning-18px-white.svg.png" />
+    <Resource Include="media\warning-24px-aa00.svg.png" />
+    <Resource Include="media\warning-24px-c837.svg.png" />
+    <Resource Include="media\warning-24px-d400.svg.png" />
+    <Resource Include="media\warning-24px-ff6600.svg.png" />
+    <Resource Include="media\warning-24px-ffcc00.svg.png" />
+    <Resource Include="media\warning-24px-white.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\archive-18px-2c5aa0.svg.png" />
+    <Resource Include="media\archive-18px-aa00.svg.png" />
+    <Resource Include="media\archive-18px-c837.svg.png" />
+    <Resource Include="media\archive-18px-ff6600.svg.png" />
+    <Resource Include="media\archive-18px-white.svg.png" />
+    <Resource Include="media\archive-24px-2c5aa0.svg.png" />
+    <Resource Include="media\archive-24px-aa00.svg.png" />
+    <Resource Include="media\archive-24px-black.svg.png" />
+    <Resource Include="media\archive-24px-c837.svg.png" />
+    <Resource Include="media\archive-24px-ff6600.svg.png" />
+    <Resource Include="media\archive-24px-gray30.svg.png" />
+    <Resource Include="media\archive-24px-white.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\angular-icon-1.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\linkedin-icon-2.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\websitesExamples\USMBA-256.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\tempEyeIcon\red-eye-transp.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="red-eye-transp.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="curl\curl.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\logo %2812%29.png" />
+    <Resource Include="SampleData\DummyNotificationWindowData\DummyNotificationWindowData_Files\dispatch_favicon-32x32.ico" />
+    <Resource Include="SampleData\DummyNotificationWindowData\DummyNotificationWindowData_Files\image05.png" />
+    <Resource Include="SampleData\DummyNotificationWindowData\DummyNotificationWindowData_Files\image04.png" />
+    <Resource Include="SampleData\DummyNotificationWindowData\DummyNotificationWindowData_Files\image03.png" />
+    <Resource Include="SampleData\DummyNotificationWindowData\DummyNotificationWindowData_Files\image02.png" />
+    <Resource Include="SampleData\DummyNotificationWindowData\DummyNotificationWindowData_Files\image01.png" />
+    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\logo %2811%29.png" />
+    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\logo %2810%29.png" />
+    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\jest_logo.png" />
+    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\ffmpeg-logo.png" />
+    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\favicon.png" />
+    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\favicon-32.png" />
+    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\favicon_002.ico" />
+    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\favicon.ico" />
+    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\dispatch_favicon-32x32.ico" />
+    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\USMBA-256.jpg" />
+    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\linkedin-icon-2.svg.png" />
+    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\facebook-icon-48.svg.png" />
+    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\angular-icon-1.svg.png" />
+    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\image05.png" />
+    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\image04.png" />
+    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\image03.png" />
+    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\image02.png" />
+    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\image01.png" />
+    <Resource Include="curl\note.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DataStore\NotifWindowDummyData\" />
+    <Folder Include="SampleData\SampleDataSourcetry\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,1 @@
+copied from C:\TOOLS\curl-7.75.0-win32-mingw\bin\curls.exe
