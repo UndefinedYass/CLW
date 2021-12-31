@@ -8,8 +8,11 @@ CLW Presset specifictions.md
 features-queue.md
 request.txt
 release-notes.md
+request.txt
+obj/
+downloadedPackages/
 packages - Copie/
-packages/
 CLWTest/
 TestResults/
-downloadedPackages/
+curl.exe
+packages/
