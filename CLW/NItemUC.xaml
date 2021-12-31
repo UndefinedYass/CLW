@@ -4,10 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CLW"
-             xmlns:Custom="http://metro.mahapps.com/winfx/xaml/iconpacks" x:Name="userControl" x:Class="CLW.NItemUC"
+    xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:Custom="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    x:Name="userControl" x:Class="CLW.NItemUC"
              mc:Ignorable="d" 
-             d:DesignHeight="135.875" d:DesignWidth="428" UseLayoutRounding="True">
+             d:DesignHeight="135.875" d:DesignWidth="428" UseLayoutRounding="True" MouseEnter="userControl_MouseEnter" MouseLeave="userControl_MouseLeave">
     <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <local:visibleIfNonEmptyText x:Key="visibleIfNonEmptyText"/>
         <ControlTemplate x:Key="IconButtonMi_iconHover_small_blue" TargetType="{x:Type local:IconButtonMi}">
             <ControlTemplate.Resources>
                 <Storyboard x:Key="Storyboard1">
@@ -86,7 +90,7 @@
                 </Storyboard>
                 <Storyboard x:Key="Storyboard2">
                     <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="grid">
-                        <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#FF161616"/>
+                        <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#ff161616"/>
                     </ColorAnimationUsingKeyFrames>
                     <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="contentPresenter">
                         <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="18"/>
@@ -98,7 +102,7 @@
                 <Storyboard x:Key="gotPressed"/>
                 <Storyboard x:Key="gotUnpressed"/>
             </ControlTemplate.Resources>
-            <Border x:Name="grid" Background="#FF161616" CornerRadius="48" BorderBrush="#00898989" BorderThickness="1" UseLayoutRounding="True" Width="48" Height="48">
+            <Border x:Name="grid" Background="#ff161616" CornerRadius="48" BorderBrush="#00898989" BorderThickness="1" UseLayoutRounding="True" Width="48" Height="48">
                 <VisualStateManager.VisualStateGroups>
                     <VisualStateGroup x:Name="CommonStates">
                         <VisualState x:Name="Normal"/>
@@ -134,36 +138,83 @@
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
+        <Storyboard x:Key="FadeOutMardReadButton">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="markReadButtonMD">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="markReadButtonMD">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="FadeInMardReadButton">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="markReadButtonMD">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="markReadButtonMD">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.1" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
     </UserControl.Resources>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource FadeOutMardReadButton}"/>
+        </EventTrigger>
+    </UserControl.Triggers>
     <Grid>
 
-        <Border x:Name="new_model1" Background="{Binding Background, ElementName=userControl}" Margin="0" BorderBrush="#FF27282C" BorderThickness="0,0,0,1" MinHeight="85">
-            <Grid MinHeight="84">
+        <Border x:Name="new_model1" Background="{Binding Background, ElementName=userControl}" Margin="0" BorderBrush="{DynamicResource MaterialDesignDivider}" BorderThickness="0,0,0,1" MinHeight="85">
+            <Grid MinHeight="84" Background="Transparent">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="68"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="22"/>
-                    <RowDefinition Height="28"/>
+                    <RowDefinition Height="22"/>
                     <RowDefinition/>
-                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="24"/>
                 </Grid.RowDefinitions>
-                <TextBlock x:Name="title_lbl" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Title, ElementName=userControl, FallbackValue=TITLE}" VerticalAlignment="Top" FontSize="16" Foreground="Gainsboro" FontWeight="Bold" Margin="5,0,0,0"/>
-                <TextBlock x:Name="subTitle_lbl" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding SubTitle, ElementName=userControl, FallbackValue=SUB TITLE}" FontSize="14.667" Foreground="#FFD1D1D1" VerticalAlignment="Top" Margin="5,0,0,0" Grid.Row="1"/>
-                <TextBlock x:Name="contentText_lbl" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding ContentText, ElementName=userControl, FallbackValue=Content text here}" VerticalAlignment="Top" FontSize="13.333" Foreground="#FFC1C1C1" Margin="15,0,2,5" Grid.Row="2" d:LayoutOverrides="VerticalAlignment"/>
-                <TextBlock x:Name="fastLink_lbl" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding FastLink, ElementName=userControl, FallbackValue=https://linkhere.com/abc/qqd65h46rz4654q64h6r54z6y8a7r98r7y65s4d654h68ez79y98zr4654h65s889r79rz8465h46zr87u9}" VerticalAlignment="Top" FontSize="13.333" Foreground="#FF23A5FF" Margin="5,0,0,0" Grid.Row="3" TextOptions.TextFormattingMode="Display" TextTrimming="CharacterEllipsis"/>
-                <Grid x:Name="controlss" Grid.Column="1" Margin="0" Grid.RowSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center" Height="80">
+                <TextBlock x:Name="title_lbl" HorizontalAlignment="Left" TextWrapping="WrapWithOverflow" Text="{Binding Path=Model.Title,  FallbackValue=TITLE}" VerticalAlignment="Top" FontSize="16" Foreground="{DynamicResource MaterialDesignBody}" FontWeight="Bold" Margin="5,0,0,0" ToolTip="{Binding Text, ElementName=title_lbl}" TextTrimming="CharacterEllipsis"/>
+                <TextBlock x:Name="subTitle_lbl" HorizontalAlignment="Left" TextWrapping="WrapWithOverflow" Text="{Binding Path=Model.SubTitle,  FallbackValue=SUB TITLE}" FontSize="14.667" Foreground="{DynamicResource MaterialDesignBodyLight}" VerticalAlignment="Top" Margin="5,0,0,0" Grid.Row="1" ToolTip="{Binding Text, ElementName=subTitle_lbl}" TextTrimming="CharacterEllipsis" />
+                <Grid Grid.Column="1" Margin="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Border BorderBrush="{DynamicResource MaterialDesignBodyLight}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2,2,0,0" Height="16" BorderThickness="1" Visibility="{Binding Text, Converter={StaticResource visibleIfNonEmptyText}, ElementName=Extension_lbl}" >
+                        <TextBlock  x:Name="Extension_lbl" Text="{Binding Extension, FallbackValue=xmls}" FontSize="9.333" Foreground="{DynamicResource MaterialDesignBody}" ToolTip="{Binding Text, ElementName=subTitle_lbl}" TextOptions.TextFormattingMode="Display" Padding="2,1"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <Button x:Name="OpenFileButt" Foreground="{DynamicResource MaterialDesignBody}" Command="{Binding OpenDownloadedFileCommand}"  Style="{StaticResource MaterialDesignFlatButton}" Visibility="{Binding HasDownloaded, Converter={StaticResource BooleanToVisibilityConverter}}" Width="18" Height="18" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0" Margin="2,1,0,0" Grid.Column="1">
+                        <Custom:PackIconFontAwesome Kind="ExternalLinkSquareAltSolid" Width="14" Height="14" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Button>
+                </Grid>
+                <TextBlock x:Name="contentText_lbl" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Path=Model.TextContent, FallbackValue=Content text here}" VerticalAlignment="Top" FontSize="13.333" Foreground="{DynamicResource MaterialDesignBody}" Margin="15,0,0,0" Grid.Row="2" ToolTip="{Binding ContentText, ElementName=userControl, FallbackValue=Content text here}" IsEnabled="False"/>
+                <TextBlock x:Name="LinkTb" HorizontalAlignment="Left" TextWrapping="Wrap"   VerticalAlignment="Top" FontSize="13.333"  Margin="5,0,0,0" Grid.Row="3" TextOptions.TextFormattingMode="Display" TextTrimming="CharacterEllipsis" Background="#00C90909" ToolTip="Open Link">
+  <Hyperlink 
+                		Style="{StaticResource MaterialDesignCaptionHyperlink}" Foreground="#FFAED7FB" Background="#00DCDC1F"><Italic><Run Text="{Binding Path=Model.Link, FallbackValue=https://linkhere.com/abc/qqd65h46rz4654q64h6r54z6y8a7r98r7y65s4d654h68ez79y98zr4654h65s889r79rz8465h46zr87u9}"></Run></Italic></Hyperlink>
+                </TextBlock>
+                <Grid x:Name="controlss_MD_version" Grid.Column="1" Margin="0,18,0,3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="80" Grid.RowSpan="4">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="162*"/>
                         <RowDefinition Height="100*"/>
                     </Grid.RowDefinitions>
-                    <local:IconButtonMi x:Name="ArchiveButton" Margin="0" Grid.Row="1" Template="{DynamicResource IconButtonMi_iconHover_small_blue}" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Custom:PackIconMaterial HorizontalAlignment="Stretch" Height="Auto" Margin="0" VerticalAlignment="Stretch" Width="Auto" Foreground="White" Kind="EyeCheck"/>
-                    </local:IconButtonMi>
-                    <local:IconButtonMi x:Name="DownloadButton" Margin="0" Template="{DynamicResource IconButtonMi_hoverIcon_big_blue}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="DownloadButton_Click">
-                        <Custom:PackIconFontAwesome x:Name="downIco_Copy2" HorizontalAlignment="Stretch" Height="Auto" Margin="0" VerticalAlignment="Stretch" Width="Auto" Foreground="White" Kind="DownloadSolid" Background="#00FF0505" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition"/>
-                    </local:IconButtonMi>
+
+                    <Button x:Name="DownloadButtonMD"  Click="DownloadButton_Click"
+  Style="{StaticResource MaterialDesignIconButton}"
+  ToolTip="Download (Hold CTRL to chose location)" 
+                        
+  Background="{DynamicResource MaterialDesignTextFieldBoxBackground}" HorizontalAlignment="Center" Command="{Binding DownloadCommand}" VerticalAlignment="Center">
+                        <Custom:PackIconFontAwesome x:Name="downIco_Copy1"  Kind="DownloadSolid"/>
+
+                    </Button>
+                    <Button x:Name="markReadButtonMD"
+                        Command="{Binding MarkSeenCommand}"
+  Style="{StaticResource MaterialDesignIconForegroundButton}"
+  ToolTip="Mark this item as read"
+  Background="{DynamicResource MaterialDesignTextFieldBoxBackground}" Grid.Row="1" Width="31" Height="31" Opacity="0" Visibility="Hidden">
+                        <Custom:PackIconMaterial  Kind="EyeCheck"/>
+
+                    </Button>
                 </Grid>
             </Grid>
         </Border>

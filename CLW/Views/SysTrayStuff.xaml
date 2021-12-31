@@ -1,0 +1,86 @@
+﻿ <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:CLW.Views"
+                     xmlns:ViewModel="clr-namespace:CLW.ViewModel"
+                    
+        xmlns:Custom="http://metro.mahapps.com/winfx/xaml/iconpacks" 
+                            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+
+                     xmlns:tb="http://www.hardcodet.net/taskbar">
+
+
+
+    <ViewModel:SysTrayModel  x:Key="SysTrayModelInstance" ></ViewModel:SysTrayModel>
+
+    <ContextMenu FontSize="13" TextOptions.TextFormattingMode="Display" UseLayoutRounding="True" SnapsToDevicePixels="True"    materialDesign:ColorZoneAssist.Mode="Light" x:Shared="false" x:Key="SysTrayMenu">
+        <!--what to add in notifyIcon context menu:
+open/close UI 
+show last notification
+acivate/deactivat
+activate all watchers/deactivate all watchers
+mute/unmute sound
+set bandwith limit
+disable /enable auto download
+about clw-->
+        <MenuItem   Header="Show/Hide Window" Command="{Binding ShowHideWindowCommand}"   >
+            <MenuItem.Icon>
+                <Custom:PackIconMaterial Kind="WindowMaximize"></Custom:PackIconMaterial>
+            </MenuItem.Icon>
+        </MenuItem>
+        
+        <MenuItem   Header="Show Last Notification" Command="{Binding ShowLastNotificationCommand}"   >
+            <MenuItem.Icon>
+                <Custom:PackIconMaterial Kind="Bell"></Custom:PackIconMaterial>
+            </MenuItem.Icon>
+        </MenuItem>
+
+        <MenuItem   IsChecked="True" IsCheckable="True"   Header="Activated"  />
+        <MenuItem   IsCheckable="True" IsChecked="True"  Header="Notifications"/>
+        <MenuItem   Command="{Binding StartAllWatchersCommand}"  Header="Start All"/>
+        <MenuItem   Command="{Binding StopAllWatchersCommand}"  Header="Stop All"/>
+
+
+        <MenuItem    Header="Limit Download bandwidth"  >
+            <MenuItem.Icon>
+                <Custom:PackIconMaterial Kind="Speedometer"></Custom:PackIconMaterial>
+            </MenuItem.Icon>
+            <MenuItem Header="1kb/s" IsCheckable="True"  />
+            <MenuItem Header="5kb/s" IsCheckable="True"  IsChecked="True" />
+            <MenuItem Header="10kb/s" IsCheckable="True"  />
+            <MenuItem Header="100kb/s" IsCheckable="True"  />
+            <MenuItem Header="1mb/s" IsCheckable="True"  />
+        </MenuItem>
+        <Separator />
+        <MenuItem  Header="Exit" Command="{Binding ExitApplicationCommand}" >
+            <MenuItem.Icon>
+                <Custom:PackIconMaterial Kind="Power"></Custom:PackIconMaterial>
+            </MenuItem.Icon>
+        </MenuItem>
+    </ContextMenu>
+
+    <!-- Globally declared notify icon -->
+
+
+    <Image x:Key="defaultTrayImage" Source="media/SysTrayIcon-default.ico"></Image>
+    <tb:TaskbarIcon  x:Key="NotifyIcon" Style="{x:Null}"
+                    
+                  DataContext="{StaticResource SysTrayModelInstance}"
+                    
+                    LeftClickCommand="{Binding ActivateWindowCommand}"
+                    DoubleClickCommand="{Binding ShowHideWindowCommand}"
+                    ContextMenu="{StaticResource SysTrayMenu}"
+                     IconSource="{Binding CurrentIcon}" >
+        <tb:TaskbarIcon.TrayToolTip >
+            <Border Background="{DynamicResource MaterialDesignToolTipBackground}" 
+                    CornerRadius="3"
+                    >
+                <TextBlock Padding="8 4 8 4" Foreground="{DynamicResource MaterialDesignDarkBackground}" Text="{Binding ToolTipText}" TextAlignment="Center"></TextBlock>
+            </Border>
+        </tb:TaskbarIcon.TrayToolTip>
+       
+    </tb:TaskbarIcon> 
+    
+    
+    
+    
+</ResourceDictionary>

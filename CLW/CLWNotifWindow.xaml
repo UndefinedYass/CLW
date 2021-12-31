@@ -4,13 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CLW"
-        xmlns:Custom="http://metro.mahapps.com/winfx/xaml/iconpacks" xmlns:SampleData="clr-namespace:Expression.Blend.SampleData.DummyNotificationWindowData" x:Class="CLW.CLWNotifWindow"
+        xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:Custom="http://metro.mahapps.com/winfx/xaml/iconpacks" 
+    
+    x:Class="CLW.CLWNotifWindow"
         mc:Ignorable="d"
-        Title="CLWNotification" Width="328" Background="#FF1A1A1A" ResizeMode="NoResize" WindowStyle="None" Topmost="True" TextOptions.TextFormattingMode="Display" Loaded="Window_Loaded" Foreground="#FFD8D8D8" Height="124.839">
+        Title="CLWNotification" Width="328" ResizeMode="NoResize" WindowStyle="None" Topmost="True" TextOptions.TextFormattingMode="Display" Loaded="Window_Loaded" Height="124.839" Background="Transparent" AllowsTransparency="True">
 
     <Window.Resources>
 
-        <SampleData:DummyNotificationWindowData x:Key="DummyNotificationWindowData" d:IsDataSource="True"/>
 
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <SolidColorBrush x:Key="LinesGrayColor" Color="#FF494949"/>
@@ -96,7 +98,8 @@
     <Window.TaskbarItemInfo>
         <TaskbarItemInfo/>
     </Window.TaskbarItemInfo>
-    <Border BorderBrush="#FF333333" BorderThickness="1" DataContext="{Binding Source={StaticResource DummyNotificationWindowData}}">
+    <Border BorderBrush="{DynamicResource MaterialDesignCardBackground}"  BorderThickness="1"  Background="{DynamicResource MaterialDesignPaper}"  CornerRadius="7"
+         >
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
@@ -115,42 +118,60 @@
                                 <ColumnDefinition Width="48"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Image x:Name="image" Margin="0" Width="32" Height="32" Source="{Binding WatcherIcon}"/>
+                            <Image x:Name="image" Margin="0" Width="32" Height="32" Source="media/angular-icon-1.svg.png"/>
 
-                            <TextBlock x:Name="title" FontSize="14.667" Foreground="#FFD1D1D1" UseLayoutRounding="True" TextWrapping="Wrap" ClipToBounds="True" SnapsToDevicePixels="True" Text="{Binding NItemTitle}" Grid.Column="1"/>
+                            <TextBlock x:Name="title"  Foreground="{DynamicResource MaterialDesignBody}" Style="{StaticResource MaterialDesignSubtitle2TextBlock}" UseLayoutRounding="True" TextWrapping="Wrap" ClipToBounds="True" SnapsToDevicePixels="True" Text="{Binding NItemTitle}"  d:Text="uuy" Grid.Column="1"/>
                         </Grid>
-                        <Border x:Name="Actions" Margin="10,0,10,2" Background="#00000000" Grid.Row="1" Height="23" VerticalAlignment="Bottom" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource LinesGrayColor}">
+                        <Border x:Name="Actions" Margin="10,0,10,2" Background="#00000000" Grid.Row="1" VerticalAlignment="Bottom" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource MaterialDesignDivider}" Padding="0,2,0,0">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="2"/>
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="2"/>
-                                    <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
-                                <Button x:Name="ShowNewsButt"  Background="#00000000" BorderBrush="{x:Null}" Foreground="{DynamicResource FocalDarkGreen}" Click="ShowNewsButt_Click" Margin="0" d:LayoutOverrides="LeftPosition, RightPosition" Height="20" Template="{DynamicResource HovrHighlightForegroundButton}"/>
-                                <Path Data="M110.75,2.75 L110.75,15.730769" Margin="0" Stretch="Fill" Stroke="{DynamicResource LinesGrayColor}" UseLayoutRounding="False" Width="1" Height="15" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
-                                <Button x:Name="MarkAsReadButt"  Background="#00000000" BorderBrush="{x:Null}" Foreground="#FFDED8D8" Click="MarkAsReadButt_Click" Margin="0" Height="20" Grid.Column="1" Grid.ColumnSpan="2" Template="{DynamicResource SeenButtonControlTemplate}"/>
-                                <Path Data="M110.75,2.75 L110.75,15.730769" Margin="0" Stretch="Fill" Stroke="{DynamicResource LinesGrayColor}" UseLayoutRounding="False" Width="1" VerticalAlignment="Center" Height="15" HorizontalAlignment="Center" Grid.Column="3" Visibility="Hidden"/>
-                                <Button x:Name="DownloadBtton"  Background="{DynamicResource NotifcaionWinButtonsForeground_hover}" BorderBrush="{x:Null}" Height="20" Click="DownloadBtton_Click" Margin="0" Grid.Column="4" Foreground="#FF9DD6BA" Template="{DynamicResource dOWNLOADButtonControlTemplate1}">
-                                    <Grid>
-                                        <TextBlock x:Name="unreadInfo2" Margin="20,1,0,2" TextWrapping="Wrap" Foreground="{DynamicResource NotificationWindowButtonsForegroud}" FontSize="13.333" HorizontalAlignment="Left" VerticalAlignment="Center" Text="DOWNLOAD"/>
-                                        <Grid x:Name="bell2" HorizontalAlignment="Left" Width="16" VerticalAlignment="Center" Height="16" d:LayoutOverrides="TopMargin, BottomMargin">
-                                            <Image x:Name="bellIco2" Height="16" VerticalAlignment="Center"  Margin="0" HorizontalAlignment="Center" Width="16" Opacity="0.7"/>
-                                            <Custom:PackIconRadixIcons HorizontalAlignment="Stretch" Height="17" Margin="0" VerticalAlignment="Bottom" Width="17" Kind="PinBottom" Foreground="{DynamicResource NotificationWindowButtonsForegroud}"/>
+                                <Button x:Name="OpenNewsButtMd"
+  Style="{StaticResource MaterialDesignFlatButton}"
+  Click="ShowNewsButt_Click" Margin="0" d:LayoutOverrides="LeftPosition, RightPosition" Height="Auto"
+                                   
+  ToolTip="MaterialDesignFlatButton" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Grid Margin="0"  HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock x:Name="unreadInfo" Margin="20,1,0,2" TextWrapping="Wrap" FontSize="13.333" HorizontalAlignment="Left" VerticalAlignment="Center" Text="NEWS" Style="{DynamicResource MaterialDesignButtonTextBlock}" />
+                                        <Grid x:Name="icon" HorizontalAlignment="Left" Width="16" VerticalAlignment="Center" Height="16" d:LayoutOverrides="TopMargin, BottomMargin">
+                                            <Custom:PackIconMaterial x:Name="packIconBootstrapIcons" HorizontalAlignment="Stretch" Height="16" Margin="0" VerticalAlignment="Stretch" Width="16" d:Kind="ListStars" Kind="Email" />
                                         </Grid>
                                     </Grid>
+
+                                </Button>
+                                <Button x:Name="ShowNewsButt_old"  Background="#00000000" BorderBrush="{x:Null}" Foreground="{DynamicResource FocalDarkGreen}" Click="ShowNewsButt_Click" Margin="0" d:LayoutOverrides="LeftPosition, RightPosition" Height="20" Template="{DynamicResource HovrHighlightForegroundButton}" Visibility="Collapsed"/>
+                                <Path Data="M110.75,2.75 L110.75,15.730769" Margin="0" Stretch="Fill" Stroke="{DynamicResource LinesGrayColor}" UseLayoutRounding="False" Width="1" Height="15" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
+                                <Button x:Name="MarkAsReadButt_old"  Background="#00000000" BorderBrush="{x:Null}" Foreground="#FFDED8D8" Click="MarkAsReadButt_Click" Margin="0" Height="20" Grid.Column="1" Grid.ColumnSpan="2" Template="{DynamicResource SeenButtonControlTemplate}" Visibility="Collapsed"/>
+                                <Path Data="M110.75,2.75 L110.75,15.730769" Margin="0" Stretch="Fill" Stroke="{DynamicResource LinesGrayColor}" UseLayoutRounding="False" Width="1" VerticalAlignment="Center" Height="15" HorizontalAlignment="Center" Grid.Column="3" Visibility="Hidden"/>
+                                <Button x:Name="MarkReadButtMd"
+                                	Style="{StaticResource MaterialDesignFlatButton}"
+                                	Click="ShowNewsButt_Click" Margin="0" Height="Auto"
+                                   
+                                	ToolTip="MaterialDesignFlatButton" HorizontalAlignment="Center" VerticalAlignment="Center" d:LayoutOverrides="LeftPosition, RightPosition" Grid.Column="2">
+                                    <Grid Margin="0"  HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock x:Name="unreadInfo1" Margin="20,1,0,2" TextWrapping="Wrap" FontSize="13.333" HorizontalAlignment="Left" VerticalAlignment="Center" Text="MARK READ" Style="{DynamicResource MaterialDesignButtonTextBlock}" />
+                                        <Grid x:Name="icon1" HorizontalAlignment="Left" Width="16" VerticalAlignment="Center" Height="16" d:LayoutOverrides="TopMargin, BottomMargin">
+                                            <Custom:PackIconBootstrapIcons  HorizontalAlignment="Stretch" Height="16" Margin="0" VerticalAlignment="Stretch" Width="16" Kind="CheckAll" />
+
+                                        </Grid>
+                                    </Grid>
+
                                 </Button>
                             </Grid>
                         </Border>
                         <Grid x:Name="LinkOrCount" Height="21" Margin="10,0,17,0" Grid.Row="1" VerticalAlignment="Top" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
-                            <TextBlock x:Name="fastLink" Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding NItemFastLink}" Foreground="#FF0097FF" HorizontalAlignment="Left" VerticalAlignment="Center" Cursor="Hand">
-								<!--<i:Interaction.Triggers>
-                            		<i:EventTrigger EventName="MouseLeftButtonDown">
-                            			<ei:LaunchUriOrFileAction Path="{Binding Text, ElementName=fastLink}"/>
-                            		</i:EventTrigger>
-                            	</i:Interaction.Triggers>-->
+                            <TextBlock    Margin="10,0,0,0" TextWrapping="Wrap"
+                                          x:Name="fastLink" 
+                                           HorizontalAlignment="Left" VerticalAlignment="Center"
+                                          >
+  <Hyperlink 
+                		Style="{StaticResource MaterialDesignCaptionHyperlink}" Background="#00DCDC1F"><Italic><Run Text="{Binding NItemFastLink}"></Run></Italic></Hyperlink>
                             </TextBlock>
+
                             <TextBlock x:Name="countInfo" Margin="10,0,0,0" TextWrapping="Wrap" Text="and 4 more.." Foreground="#FFA2A2A2" FontSize="10.667" HorizontalAlignment="Left" VerticalAlignment="Center" Visibility="Hidden"/>
                         </Grid>
 

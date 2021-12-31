@@ -10,11 +10,11 @@ none
 false
 TRACE
 C:\TOOLS\CLW\CLW\CLW\App.xaml
-6-2042982790
+8-814227306
 1-455649528
-18-1770540504
-50-767366600
-CLWNotifWindow.xaml;MainWindow.xaml;NItemUC.xaml;SampleData\DummyNotificationWindowData\DummyNotificationWindowData.xaml;Simple Styles.xaml;WatcherUC.xaml;
+50566530472
+117651781979
+Views\SettingsWindow.xaml;MainWindow.xaml;Views\SysTrayBallonUC.xaml;Views\SysTrayStuff.xaml;Views\NewItemView.xaml;Views\NotificationWindowView.xaml;Views\WatcherPropertiesWindow.xaml;Views\WatcherView.xaml;
 
-False
+True
 

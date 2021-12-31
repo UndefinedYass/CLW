@@ -9,11 +9,13 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CLW</RootNamespace>
     <AssemblyName>CLW</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,9 +37,28 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>red-eye-transp.ico</ApplicationIcon>
+    <ApplicationIcon>CLW-APP-ICON1.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AngleSharp, Version=0.16.0.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
+      <HintPath>..\packages\AngleSharp.0.16.0\lib\net46\AngleSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Cake.Curl, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cake.Curl.4.1.0\lib\net46\Cake.Curl.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ControlzEx, Version=4.0.0.0, Culture=neutral, PublicKeyToken=69f1c32f803d307e, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.4.4.0\lib\net45\ControlzEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Hardcodet.Wpf.TaskbarNotification">
+      <HintPath>.\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=2.0.0.0, Culture=neutral, PublicKeyToken=51482d6f650b2b3f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.2.4.7\lib\net452\MahApps.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MahApps.Metro.IconPacks, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.dll</HintPath>
       <Private>True</Private>
@@ -162,16 +183,43 @@
       <HintPath>..\packages\MahApps.Metro.IconPacks.4.8.0\lib\net45\MahApps.Metro.IconPacks.Zondicons.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MaterialDesignColors, Version=2.0.2.2657, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.2.0.2-ci2657\lib\net452\MaterialDesignColors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.MahApps, Version=0.1.8.2657, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.MahApps.0.1.8-ci2657\lib\net452\MaterialDesignThemes.MahApps.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=4.2.0.2657, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.4.2.0-ci2657\lib\net452\MaterialDesignThemes.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.19\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Ookii.Dialogs.Wpf, Version=3.0.0.0, Culture=neutral, PublicKeyToken=66aa232afad40158, processorArchitecture=MSIL">
       <HintPath>..\packages\Ookii.Dialogs.Wpf.3.1.0\lib\net45\Ookii.Dialogs.Wpf.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PresentationFramework.Aero" />
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\netstandard1.1\System.Buffers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Text.Encoding.CodePages, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encoding.CodePages.5.0.0\lib\net46\System.Text.Encoding.CodePages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -191,22 +239,62 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CLW.cs" />
-    <Compile Include="CLWNotifWindow.xaml.cs">
-      <DependentUpon>CLWNotifWindow.xaml</DependentUpon>
+    <Compile Include="Converters\IntToVisibilityConverter.cs" />
+    <Compile Include="Views\IconButtonMi.cs" />
+    <Compile Include="Model\CLW.cs" />
+    <Compile Include="Views\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Fucs.cs" />
-    <Compile Include="HIconButton.cs" />
-    <Compile Include="SampleData\DummyNotificationWindowData\DummyNotificationWindowData.xaml.cs">
-      <DependentUpon>DummyNotificationWindowData.xaml</DependentUpon>
+    <Compile Include="Converters\CollectionViewGroupToStringConverter.cs" />
+    <Compile Include="Converters\DateTimeConverters.cs" />
+    <Compile Include="Converters\TempGen.cs" />
+    <Compile Include="Services\Fucs.cs" />
+    <Compile Include="Views\HIconButton.cs" />
+    <Compile Include="Model\Enums.cs" />
+    <Compile Include="Model\ET.cs" />
+    <Compile Include="Model\Exceptions.cs" />
+    <Compile Include="Model\ListWatcherBase.cs">
+      <SubType>Component</SubType>
     </Compile>
-    <Compile Include="SampleData\watchersSample\watchersSample.xaml.cs">
-      <DependentUpon>watchersSample.xaml</DependentUpon>
+    <Compile Include="Model\NewModel.cs" />
+    <Compile Include="Model\Preset.cs" />
+    <Compile Include="Model\WatcherModel.cs" />
+    <Compile Include="Services\ConfigService.cs" />
+    <Compile Include="Services\NewsDataProvider.cs" />
+    <Compile Include="Services\Utils.cs" />
+    <Compile Include="Services\WatchingService.cs" />
+    <Compile Include="Services\WebClient.cs" />
+    <Compile Include="Views\SysTrayBallonUC.xaml.cs">
+      <DependentUpon>SysTrayBallonUC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WatcherUC.xaml.cs">
-      <DependentUpon>WatcherUC.xaml</DependentUpon>
+    <Compile Include="ViewModel\SysTrayModel.cs" />
+    <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MICommand.cs" />
+    <Compile Include="ViewModel\NewItemViewModule.cs" />
+    <Compile Include="ViewModel\NewsSectionViewModel.cs" />
+    <Compile Include="ViewModel\NotificationViewModel.cs" />
+    <Compile Include="ViewModel\SettingsWindowViewModel.cs" />
+    <Compile Include="ViewModel\WatcherPropertiesWindowViewModel.cs" />
+    <Compile Include="ViewModel\WatcherViewModel.cs" />
+    <Compile Include="Views\Attached\BrowseFolderCommand.cs" />
+    <Compile Include="Views\Attached\ButtonProperties.cs" />
+    <Compile Include="Views\Attached\ListBoxProps.cs" />
+    <Compile Include="Views\Attached\WindowProperties.cs" />
+    <Compile Include="Views\NewItemView.xaml.cs">
+      <DependentUpon>NewItemView.xaml</DependentUpon>
     </Compile>
-    <Page Include="CLWNotifWindow.xaml">
+    <Compile Include="Views\NotificationWindowView.xaml.cs">
+      <DependentUpon>NotificationWindowView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WatcherPropertiesWindow.xaml.cs">
+      <DependentUpon>WatcherPropertiesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WatcherView.xaml.cs">
+      <DependentUpon>WatcherView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VML\ViewModelLocator.cs" />
+    <Page Include="Views\SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -218,44 +306,36 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="IconButtonMi.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="NItemUC.xaml">
+    <Page Include="Views\SysTrayBallonUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SampleData\DummyNotificationWindowData\DummyNotificationWindowData.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Views\SysTrayStuff.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Views\NewItemView.xaml">
       <SubType>Designer</SubType>
-    </DesignTimeOnly>
-    <DesignData Include="SampleData\SessionSampleData.xaml">
       <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </DesignData>
-    <DesignData Include="SampleData\SelectedCustomLWSampleData.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </DesignData>
-    <Page Include="Simple Styles.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
-    <Page Include="WatcherUC.xaml">
+    <Page Include="Views\NotificationWindowView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WatcherPropertiesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WatcherView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NItemUC.xaml.cs">
-      <DependentUpon>NItemUC.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -269,6 +349,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Model\ListWatcherBase.resx">
+      <DependentUpon>ListWatcherBase.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -280,6 +363,9 @@
     <None Include="media\from fbhd\24px.svg" />
     <None Include="media\from fbhd\drawing.svg" />
     <None Include="media\from fbhd\drawings-codde-logo.svg" />
+    <None Include="media\gif\ajax-loader %2813%29.giif" />
+    <None Include="media\gif\Ajaxload - Ajax loading gif generator.mhtml" />
+    <None Include="media\gif\ajaxLoaders.zip" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -289,8 +375,6 @@
     <None Include="release-notes.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="SampleData\DummyNotificationWindowData\DummyNotificationWindowData.xsd" />
-    <None Include="SampleData\watchersSample\watchersSample.xsd" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -669,44 +753,59 @@
     <Resource Include="red-eye-transp.ico" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="media\bouchra2.png" />
+    <Resource Include="media\tempEyeIcon\pink-white-simpleEys-trasp-opac-center-h30-pp.png" />
+    <Resource Include="media\tempEyeIcon\pink-white-simpleEys-trasp-opac-center-h30.png" />
+    <Resource Include="media\tempEyeIcon\pink-lightblue-simpleEys-trasp-opac-center-h48.png" />
+    <Resource Include="media\tempEyeIcon\pink-simpleEys-trasp-opac-center-h30.png" />
+    <Resource Include="media\tempEyeIcon\pink-simpleEys-trasp-opac-center-h48.png" />
+    <Resource Include="media\tempEyeIcon\PINK-ICON.png" />
+    <Resource Include="media\tempEyeIcon\black.png" />
+    <Resource Include="media\gif\ajax-loader %281%29.gif" />
+    <Resource Include="media\gif\ajax-loader %2810%29.gif" />
+    <Resource Include="media\gif\ajax-loader %2811%29.gif" />
+    <Resource Include="media\gif\ajax-loader %2811body %29.gif" />
+    <Resource Include="media\gif\ajax-loader %2812%29.gif" />
+    <Resource Include="media\gif\ajax-loader %2813%29.gif" />
+    <Resource Include="media\gif\ajax-loader %282%29.gif" />
+    <Resource Include="media\gif\ajax-loader %283%29.gif" />
+    <Resource Include="media\gif\ajax-loader %284%29.gif" />
+    <Resource Include="media\gif\ajax-loader %285%29.gif" />
+    <Resource Include="media\gif\ajax-loader %286%29.gif" />
+    <Resource Include="media\gif\ajax-loader %287%29.gif" />
+    <Resource Include="media\gif\ajax-loader %288%29.gif" />
+    <Resource Include="media\gif\ajax-loader %289%29.gif" />
+    <Resource Include="media\gif\ajax-loader-body-balls.gif" />
+    <Resource Include="media\gif\ajax-loader-bodylight-bouncing.gif" />
+    <Resource Include="media\gif\ajax-loader-bodylight-snake.gif" />
+    <Resource Include="media\gif\ajax-loader-dark.gif" />
+    <Resource Include="media\gif\ajax-loader-light-green-ball.gif" />
+    <Resource Include="media\gif\ajax-loader-light-secondary-ft-paper-bg.gif" />
+    <Resource Include="media\gif\ajax-loader.gif" />
+    <Resource Include="media\node-eye-red-white-circles-play.png" />
+    <Resource Include="CLW-APP-ICON1.ico" />
     <Content Include="curl\curl.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\logo %2812%29.png" />
-    <Resource Include="SampleData\DummyNotificationWindowData\DummyNotificationWindowData_Files\dispatch_favicon-32x32.ico" />
-    <Resource Include="SampleData\DummyNotificationWindowData\DummyNotificationWindowData_Files\image05.png" />
-    <Resource Include="SampleData\DummyNotificationWindowData\DummyNotificationWindowData_Files\image04.png" />
-    <Resource Include="SampleData\DummyNotificationWindowData\DummyNotificationWindowData_Files\image03.png" />
-    <Resource Include="SampleData\DummyNotificationWindowData\DummyNotificationWindowData_Files\image02.png" />
-    <Resource Include="SampleData\DummyNotificationWindowData\DummyNotificationWindowData_Files\image01.png" />
-    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\logo %2811%29.png" />
-    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\logo %2810%29.png" />
-    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\jest_logo.png" />
-    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\ffmpeg-logo.png" />
-    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\favicon.png" />
-    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\favicon-32.png" />
-    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\favicon_002.ico" />
-    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\favicon.ico" />
-    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\dispatch_favicon-32x32.ico" />
-    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\USMBA-256.jpg" />
-    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\linkedin-icon-2.svg.png" />
-    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\facebook-icon-48.svg.png" />
-    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\angular-icon-1.svg.png" />
-    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\image05.png" />
-    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\image04.png" />
-    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\image03.png" />
-    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\image02.png" />
-    <DesignTimeOnly Include="SampleData\watchersSample\watchersSample_Files\image01.png" />
+    <Resource Include="media\websitesExamples\sample\eye-node-big.png" />
+    <Resource Include="media\websitesExamples\sample\eye-node.png" />
+    <Resource Include="red-eye-transp-16+green-w7-dot-margined.png" />
+    <Resource Include="media\SysTrayIcon-dot.ico" />
+    <Resource Include="media\SysTrayIcon-default.ico" />
+    <Resource Include="media\SysTrayIcon-warning.ico" />
     <Resource Include="curl\note.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DataStore\NotifWindowDummyData\" />
-    <Folder Include="SampleData\SampleDataSourcetry\" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <Import Project="..\packages\MaterialDesignThemes.4.2.0-ci2657\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.2.0-ci2657\build\MaterialDesignThemes.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MaterialDesignThemes.4.2.0-ci2657\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MaterialDesignThemes.4.2.0-ci2657\build\MaterialDesignThemes.targets'))" />
+  </Target>
+  <!-- To  modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

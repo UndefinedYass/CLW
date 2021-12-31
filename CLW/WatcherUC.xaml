@@ -4,10 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CLW"
+          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:Custom="http://metro.mahapps.com/winfx/xaml/iconpacks" x:Name="userControl" x:Class="CLW.WatcherUC"
              mc:Ignorable="d" 
              d:DesignHeight="58" d:DesignWidth="261" UseLayoutRounding="True" Margin="4,2" Height="58">
     <UserControl.Resources>
+        <materialDesign:NotZeroConverter x:Key="NotZeroConverter"/>
+        <local:badgeZeroToNullReplacer x:Key="badgeZeroToNullReplacer"></local:badgeZeroToNullReplacer>
         <local:boolToVisibilityInverted x:Key="boolToVisibilityInverted"/>
         <local:IntToVisibilityConverter x:Key="IntToVisibilityConverter"/>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
@@ -103,25 +106,32 @@
             <ColumnDefinition Width="44"/>
         </Grid.ColumnDefinitions>
         <Grid x:Name="header" Grid.Column="1" Margin="0,0,0,2" VerticalAlignment="Bottom" HorizontalAlignment="Left">
-            <TextBlock x:Name="textBlock7" Margin="0,0,0,-1" TextWrapping="Wrap" Text="{Binding Title, ElementName=userControl, FallbackValue=TITLE}" VerticalAlignment="Center" FontSize="14.667" Foreground="White" d:LayoutOverrides="Width" TextOptions.TextFormattingMode="Display"/>
+            <TextBlock x:Name="textBlock7" Margin="0,0,0,-1" TextWrapping="Wrap" Text="{Binding Title, ElementName=userControl, FallbackValue=TITLE}" VerticalAlignment="Center" FontSize="14.667" Foreground="{DynamicResource MaterialDesignBody}" d:LayoutOverrides="Width" TextOptions.TextFormattingMode="Display"/>
         </Grid>
-        <Grid x:Name="avatar" Margin="6,0,0,0" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="32" Height="32">
-            <Border x:Name="altAvatar" BorderThickness="1" Margin="0" Background="#FF9B0909" Visibility="{Binding CoreCustomListWatcher.HasFavicon, Converter={StaticResource boolToVisibilityInverted}, ElementName=userControl}">
-                <TextBlock x:Name="letter" Margin="0" TextWrapping="Wrap" Text="{Binding CoreCustomListWatcher.AlternativeAvatarLetter, ElementName=userControl, FallbackValue=NA, Mode=Default}" Foreground="White" FontSize="21.333" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            </Border>
-            <Image x:Name="favicon" Margin="0" Width="32" Height="32" Source="{Binding CoreCustomListWatcher.IconSource, ElementName=userControl}" HorizontalAlignment="Center" VerticalAlignment="Center" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Visibility="{Binding CoreCustomListWatcher.HasFavicon, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=userControl}"/>
-            <Border x:Name="small_info_Copy4" Margin="0,-12,-12,0" Background="White" CornerRadius="50" Width="20" HorizontalAlignment="Right" Height="20" VerticalAlignment="Top" Visibility="{Binding NewsCount, Converter={StaticResource IntToVisibilityConverter}, ElementName=userControl}">
-                <TextBlock x:Name="newsCountLbl" TextWrapping="Wrap" Text="{Binding NewsCount, ElementName=userControl, FallbackValue=0}" TextOptions.TextFormattingMode="Display" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Tw Cen MT Condensed Extra Bold" Margin="0" Foreground="Black"/>
-            </Border>
-        </Grid>
-        <Grid x:Name="state_set" Grid.Column="1" HorizontalAlignment="Left" Margin="0" Grid.Row="1" VerticalAlignment="Top">
+        <materialDesign:Badged  Margin="6,0,0,0" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" BadgeColorZoneMode="Dark" BadgeBackground="#FFEAEAEA" BadgeForeground="Black" Badge="{Binding NewsCount, Converter={StaticResource badgeZeroToNullReplacer}, ElementName=userControl, FallbackValue=0}" BadgePlacementMode="TopRight">
+            <Grid x:Name="avatar" Width="32" Height="32" >
+                <Border x:Name="altAvatar" BorderThickness="1" Margin="0" Background="#FF9B0909" Visibility="{Binding CoreCustomListWatcher.HasFavicon, Converter={StaticResource boolToVisibilityInverted}, ElementName=userControl}" Width="32" Height="32">
+                    <TextBlock x:Name="letter" Margin="0" TextWrapping="Wrap" Text="{Binding CoreCustomListWatcher.AlternativeAvatarLetter, ElementName=userControl, FallbackValue=NA, Mode=Default}" Foreground="White" FontSize="21.333" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <Image x:Name="favicon" Margin="0" Width="32" Height="32" Source="{Binding CoreCustomListWatcher.IconSource, ElementName=userControl}" HorizontalAlignment="Center" VerticalAlignment="Center" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Visibility="{Binding CoreCustomListWatcher.HasFavicon, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=userControl}"/>
+                <Border x:Name="small_info_Copy4" Margin="0,-12,-12,0" Background="White" CornerRadius="50" Width="20" HorizontalAlignment="Right" Height="20" VerticalAlignment="Top" Visibility="{Binding NewsCountrn, Converter={StaticResource IntToVisibilityConverter}, ElementName=userControl, FallbackValue=Collapsed}" d:IsHidden="True">
+                    <TextBlock x:Name="newsCountLbl" TextWrapping="Wrap" Text="{Binding NewsCount, ElementName=userControl, FallbackValue=0}" TextOptions.TextFormattingMode="Display" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Tw Cen MT Condensed Extra Bold" Margin="0" Foreground="Black"/>
+                </Border>
+            </Grid>
+
+        </materialDesign:Badged>
+         <Grid x:Name="state_set" Grid.Column="1" HorizontalAlignment="Left" Margin="0" Grid.Row="1" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="20"/>
             </Grid.ColumnDefinitions>
-            <TextBlock x:Name="state_lbl" Margin="0" TextWrapping="Wrap" Text="{Binding StateText, ElementName=userControl, FallbackValue=running}" FontSize="13.333" Foreground="#FFB8FFAD" FontStyle="Italic" TextOptions.TextFormattingMode="Display"/>
+            <TextBlock x:Name="state_lbl" Margin="0" TextWrapping="Wrap" Text="{Binding StateText, ElementName=userControl, FallbackValue=running}" FontSize="13.333" Foreground="{DynamicResource MaterialDesignBodyLight}" FontStyle="Italic" TextOptions.TextFormattingMode="Display"/>
             <Custom:PackIconRemixIcon x:Name="connectingSpinner" HorizontalAlignment="Center" Height="12" Margin="0" VerticalAlignment="Center" Width="12" Foreground="#FFB8FFAD" Kind="Loader3Fill" Spin="True" SpinDuration="2.5" Grid.Column="1" Visibility="{Binding ShowConnectingSpinner, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=userControl}"/>
         </Grid>
-        <ToggleButton x:Name="toggle" Content="ToggleButton" Margin="0" Template="{DynamicResource ToggleButtonControlTemplate1}" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.RowSpan="2" Checked="toggle_Checked" Unchecked="toggle_Unchecked"/>
+        <ToggleButton Style="{StaticResource MaterialDesignSwitchToggleButton}"  Margin="0" ToolTip="MaterialDesignSwitchToggleButton with Custom Track Background"  Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.RowSpan="2" Checked="toggle_Checked" Unchecked="toggle_Unchecked">
+           
+            
+        </ToggleButton>
+        <ToggleButton Visibility="Collapsed" x:Name="toggle" Content="ToggleButton" Margin="0" Template="{DynamicResource ToggleButtonControlTemplate1}" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.RowSpan="2" Checked="toggle_Checked" Unchecked="toggle_Unchecked"/>
     </Grid>
 </UserControl>

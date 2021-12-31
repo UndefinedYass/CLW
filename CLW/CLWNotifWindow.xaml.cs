@@ -29,6 +29,7 @@ using System.Windows.Shapes;
 
 namespace CLW
 {
+    [Obsolete("switch to mvvm one",true)]
     /// <summary>
     /// Interaction logic for CLWNotifWindow.xaml
     /// </summary>
@@ -61,18 +62,21 @@ namespace CLW
             sb.Duration = new Duration(TimeSpan.FromSeconds(0.5));
             DoubleAnimation ra = new DoubleAnimation() { From = H - Height, To = H - Height - 39, Duration = sb.Duration };
             ra.EasingFunction = new ElasticEase() { Oscillations = 1, Springiness = 0.05 };
-
+            DoubleAnimation OpacityAnim = new DoubleAnimation() { From = 0, To = 0.84, Duration = sb.Duration };
             Storyboard.SetTarget(ra, this);
             Storyboard.SetTargetProperty(ra, new PropertyPath(Window.TopProperty));
+            Storyboard.SetTarget(OpacityAnim, this);
+            Storyboard.SetTargetProperty(OpacityAnim, new PropertyPath(Window.OpacityProperty));
             sb.Children.Add(ra);
+            sb.Children.Add(OpacityAnim);
             sb.Begin();
         }
 
 
-        public List<INotifableItem> Newslist { get; set; }
+        public List<INewItem> Newslist { get; set; }
 
         public IWatch ListWatcherObj { get; set; }
-        public void Init(IEnumerable<INotifableItem> news, IWatch listWatcher)
+        public void Init(IEnumerable<INewItem> news, IWatch listWatcher)
         {
             ListWatcherObj = listWatcher;
             Newslist = news.ToList();
@@ -120,15 +124,15 @@ namespace CLW
 
 
 
-        MainWindow mw = (MainWindow)Application.Current.MainWindow;
 
         private void ShowNewsButt_Click(object sender, RoutedEventArgs e)
         {
             this.Closed += (s, a) =>
             {
                 // mw.PopupNews(Newslist, ListWatcherObj, "News", false); // only suitable for the old fbhd project
-                mw.WindowState = WindowState.Normal;
-                mw.Activate();
+                //mwwm mw.WindowState = WindowState.Normal;
+                //mvvm mw.Activate();
+                //mvvm mw.selectWatcher((CustomLW) ListWatcherObj);
 
             };
             Close();

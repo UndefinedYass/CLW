@@ -1,38 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Globalization;
-using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using Ookii.Dialogs.Wpf; 
-using System.Xml.Linq;
-using System.Windows.Shell;
-using System.Xml.Serialization;
-
+using System.Collections.ObjectModel;
+using CLW.Services;
 
 namespace CLW
 {
@@ -41,90 +17,31 @@ namespace CLW
     /// </summary>
     public partial class MainWindow : Window
     {
-        public Session mainSession { get; private set; }
+        private bool is_toy_page_visible;
+       // public Session mainSession { get; private set; }
 
         public MainWindow()
         {
-            CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.GetCultureInfo("en-US");
-            InitializeComponent();
-
-
-            //webServer = new WebServer(); //niy
-            // DataContext = mainSession;
-            mainSession = new Session();
-            DataContext = mainSession;
-        }
-
-
-
-        public void PopupNews(IEnumerable<INotifableItem> news, IWatch listwatcher, string winTitle = "News", bool IsNotifyMode = true)
-        {
-            return;
-            //GenericPopupWindow gpw = new GenericPopupWindow(); niy
-            SoundPlayerAction spa = new SoundPlayerAction();
-            if (IsNotifyMode) mainSession.PlayNotification();
-           // gpw.setItemsSource(news, listwatcher, winTitle);
-           // gpw.ShowDialog();
-        }
-
-
-
-        private async void devShowNotification_Click(object sender, RoutedEventArgs e)
-        {
-
-
-         
-            var nnf = new CLWNotifWindow();
-            nnf.Show();
-            return;
-            //MessageBox.Show("ok");
-            //return;
-            var a = new FsdmNew()
-            {
-                Title = "Dummy Notification Title",
-                Link = "http://fsdm.ma/dummyhrtdfhdf",
-                ID = "44444",
-                date = "zzrhzr"
-
-            };
-
-            var dummynews = new List<FsdmNew>()
-            {
-               a 
-            };
-            ShowNotificationNews(dummynews.Cast<INotifableItem>(), null);
-        }
-
-        private void Cltry_NewItems(object sender, List<ExpandoLWItemObject> e)
-        {
-            MessageBox.Show($"you have {e.Count} news, one of which have as title: {e[0].Title} ");
-        }
-
-        public void ShowNotificationNews(IEnumerable<INotifableItem> news, IWatch listWathcer)
-        {
-            CLWNotifWindow nm = new CLWNotifWindow();
-
-            nm.Init(news, listWathcer);
-            nm.Owner = this;
-            nm.ShowInTaskbar = false;
-
-            nm.Show();
-        }
-
-
-
-
-
-        private void primaryButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            //var fx = new MahApps.Metro.IconPacks.FileIconsExtension(PackIconFileIconsKind.AdobeAcrobat);
-            //var fx = new MahApps.Metro.IconPacks.PackIconFontAwesome();
             
+            CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.GetCultureInfo("en-US");
+            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.GetCultureInfo("en-US");
+            InitializeComponent();
+            watcher_win.Drop += (ss, se) =>
+            {
+                ShowMessage("File(s) droped");
+                string[]files = (string[]) se.Data.GetData(DataFormats.FileDrop);
+                foreach(string pth in files)
+                {
+                    if (System.IO.Path.GetExtension(pth).ToLower() == ".clw")
+                        ((ViewModel.MainViewModel)DataContext).LoadWatcherFromFilePathCommand.Execute(pth);
+                }
+            };
         }
 
-        private void PackIconCodicons_Loaded(object sender, RoutedEventArgs e)
+        protected override void OnClosing(CancelEventArgs e)
         {
-           // loader2.SpinEasingFunction = new loa();
+            base.OnClosing(e);
+            Application.Current.MainWindow = null;
         }
 
         private void CloseWindowHIButt_Click(object sender, RoutedEventArgs e)
@@ -141,17 +58,7 @@ namespace CLW
         {
             WindowState = WindowState.Minimized;
         }
-
-        private void DragArea_DragOver(object sender, DragEventArgs e)
-        {
-            
-        }
-
-        private void DragArea_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            
-        }
-
+       
         private void DragArea_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();// dreag area 2
@@ -168,79 +75,115 @@ namespace CLW
             
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void listBox_PreviewKeyUp(object sender, KeyEventArgs e)
         {
-           
+            if (e.Key == Key.Delete)
+            {
+                //todo: unloead selected watcher                
+            }
+        }
+
+        
+
+        /// <summary>
+        /// callable from anywhere anytime, any thread, exceptions-safe
+        /// </summary>
+        /// <param name="str">message to pop up at snackbar,</param>
+        public static void ShowMessage(string str)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                ((MainWindow)Application.Current.MainWindow)?.Snackbar?.MessageQueue?.Enqueue(str);
+            });
         }
 
 
-        private async void loadListWatcherPresetButt_Click(object sender, RoutedEventArgs e)
+
+        
+
+        private void brushesToy_Loaded(object sender, RoutedEventArgs e)
         {
-            Ookii.Dialogs.Wpf.VistaOpenFileDialog vofd = new VistaOpenFileDialog();
-            vofd.DefaultExt = ".xml";
-            vofd.InitialDirectory = MI.APP_DATA;
-            bool? success = vofd.ShowDialog(this);
-            if (!success.HasValue) return;
-            if (!success.Value) return;
-
-
-
-
-            CustomLW loaded;
-
-            try
+            string brushNamesRaw = @"PrimaryHueLightBrush PrimaryHueLightForegroundBrush PrimaryHueMidBrush PrimaryHueMidForegroundBrush PrimaryHueDarkBrush PrimaryHueDarkForegroundBrush SecondaryHueLightBrush SecondaryHueLightForegroundBrush SecondaryHueMidBrush SecondaryHueMidForegroundBrush SecondaryHueDarkBrush SecondaryHueDarkForegroundBrush MaterialDesignBackground MaterialDesignPaper MaterialDesignCardBackground MaterialDesignToolBarBackground MaterialDesignBody MaterialDesignBodyLight MaterialDesignColumnHeader MaterialDesignCheckBoxOff MaterialDesignCheckBoxDisabled MaterialDesignTextBoxBorder MaterialDesignDivider MaterialDesignSelection MaterialDesignFlatButtonClick MaterialDesignFlatButtonRipple MaterialDesignToolTipBackground MaterialDesignChipBackground MaterialDesignSnackbarBackground MaterialDesignSnackbarMouseOver MaterialDesignSnackbarRipple MaterialDesignTextFieldBoxBackground MaterialDesignTextFieldBoxHoverBackground MaterialDesignTextFieldBoxDisabledBackground MaterialDesignTextAreaBorder MaterialDesignTextAreaInactiveBorder";
+            var separat = brushNamesRaw.Split(' ');
+            separat = separat.Select((s) => s.Trim()).ToArray();
+            BrushesToyPageCB.ItemsSource = separat;
+            BrushesToyPanelCB.ItemsSource = separat;
+            BrushesToyTextCB.ItemsSource = separat;
+            BrushesToyPageCB.SelectionChanged += (s, ee) =>
+             {
+                 brushesToy_Page.SetResourceReference(Grid.BackgroundProperty, BrushesToyPageCB.SelectedItem.ToString());
+             };
+            BrushesToyPanelCB.SelectionChanged += (s, ee) =>
             {
-                loaded = await mainSession.LoadXMLLW(vofd.FileName);
-
-            }
-            catch (Exception ex)
+                brushesToy_Panel.SetResourceReference(Grid.BackgroundProperty, BrushesToyPanelCB.SelectedItem.ToString());
+            };
+            BrushesToyTextCB.SelectionChanged += (s, ee) =>
             {
-                MessageBox.Show( ex.Message, "Parsing failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-           
-            //if (loaded != null) //todo instead show message whn thnsg go wrong
-               // MessageBox.Show("preset loaded successfilly"); // annoying
+                BrushesToy_Body.SetResourceReference(Grid.BackgroundProperty, BrushesToyTextCB.SelectedItem.ToString());
+                BrushesToy_Text.SetResourceReference(TextBlock.ForegroundProperty, BrushesToyTextCB.SelectedItem.ToString());
+            };
         }
 
+       
+        
 
-        private async void AddWatcherButton_Click(object sender, RoutedEventArgs e)
+        private void d_key_pressed()
         {
-            MessageBox.Show("ok");
-            CustomLW cltry;
-            try
-            {
-                 cltry = await mainSession.LoadXMLLW(@"C:\TOOLS\fbhd-gui\xml\fsdmUploads.clw");
+            //toggling dev view
+            is_toy_page_visible = !is_toy_page_visible;
+            brushesToy_Page.Visibility = is_toy_page_visible ? Visibility.Visible : Visibility.Collapsed;
+            var oc = new ObservableCollection<string>();
+            oc.Add($"ConfigService Instances: {ConfigService.CCInstances}");
+            oc.Add($"WatchingService Instances: {WatchingService.CCInstances}");
 
+            devStatsListBox.ItemsSource = oc;
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.D)
+            {//todo: only execute if isDevMode
+                d_key_pressed();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return;
-            }
-            
+        }
 
-            if (cltry == null)
-            {
-                MessageBox.Show("wrong");
-                return;
-            }
-            MessageBox.Show($"loaded clw preset with name: {cltry.Name}");
-            cltry.StartWatching();
+        
 
-
-            cltry.NewItems += Cltry_NewItems;
-
-
+       
+        private void WatchersList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
             return;
+            ((ViewModel.MainViewModel)DataContext).SelectWatcherById(((ViewModel.WatcherViewModel)  WatchersList.SelectedItem).model.guid);
         }
 
-        private void image5_Loaded(object sender, RoutedEventArgs e)
-
+        private void WatchersList_DragEnter(object sender, DragEventArgs e)
         {
-           // image5.Source = new BitmapImage(new Uri(@"C:\TOOLS\CLW\CLW\CLW\media\websitesExamples\USMBA-256.jpg"));
-            //image5.Source = new BitmapImage(new Uri("http://fsdmfes.ac.ma/favicon.ico"));
+            
+        }
+      
+
+
+
+
+        private void profilerButt_Click(object sender, RoutedEventArgs e)
+        {
+            var mem = GC.GetTotalMemory(true);
+            ShowMessage($"Memo: {mem / 1000000} mb");
+            //expressions
+            //this is fucking awesome
+            //bool resulr = compiled("ok_yass_youre_a_genuis");
+            // ShowMessage($"result: {resulr}");
+        }
+
+        private void TestButton_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var item in WatchingService.Instance.Watchers)
+            {
+                item?.CoreCustomLW?.CloseAsync();
+            }
+            var mem = GC.GetTotalMemory(true);
+            ShowMessage($"Memo: {mem / 1000000} mb");
+            return;
         }
     }
 
@@ -257,25 +200,5 @@ namespace CLW
 
 
 
-    public struct FsdmNew : ListWatcherItem, INotifableItem
-    {
-        public string ID { get; set; }
-        public string PopupMessageString
-        {
-            get
-            {
-                return $"{Title} \n       {Link}";
-            }
-        }
-
-        public string SubTitle { get { return date; } }
-
-        public string Link { get; set; }
-        public string Title { get; set; }
-        public string date { get; set; }
-        public string category { get; set; }
-
-
-    }
-
+   
 }

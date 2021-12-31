@@ -109,11 +109,11 @@ namespace CLW
 
             if (CoreCustomListWatcher.IsWatching)
             {
-                CoreCustomListWatcher.StopWatching();
+                //mvvm CoreCustomListWatcher.StopWatching();
             }
             else
             {
-                CoreCustomListWatcher.StartWatching();
+                //mvvm CoreCustomListWatcher.StartWatching();
             }
             await Task.Run(() => { });
 
@@ -201,12 +201,12 @@ namespace CLW
 
         private async void toggle_Checked(object sender, RoutedEventArgs e)
         {
-            CoreCustomListWatcher.StartWatching();
+           //mvvm CoreCustomListWatcher.StartWatching();
         }
 
         private async void toggle_Unchecked(object sender, RoutedEventArgs e)
         {
-            CoreCustomListWatcher.StopWatching();
+            //mvvm CoreCustomListWatcher.StopWatching();
         }
     }
 }

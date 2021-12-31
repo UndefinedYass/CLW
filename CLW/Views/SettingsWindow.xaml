@@ -1,0 +1,334 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CLW"
+    
+        xmlns:attached="clr-namespace:CLW.Views.Attached"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:Custom="http://metro.mahapps.com/winfx/xaml/iconpacks" xmlns:ViewModel="clr-namespace:CLW.ViewModel" x:Name="window" 
+        TextOptions.TextFormattingMode="Display" 
+        SnapsToDevicePixels="True" UseLayoutRounding="True" 
+        Foreground="{DynamicResource MaterialDesignBody}" 
+        Background="{DynamicResource MaterialDesignPaper}"
+    
+        x:Class="CLW.CLWSettingsWindow"
+        mc:Ignorable="d"
+        Title="CLW v0.4.0" Width="560" 
+        
+        Closing="Window_Closing" 
+        d:DesignHeight="383" ResizeMode="CanMinimize" SizeToContent="Height" d:DataContext="{d:DesignInstance {x:Type ViewModel:SettingsWindowViewModel}, IsDesignTimeCreatable=True}" 
+    
+        >
+    <Window.Resources>
+        <ViewModel:SettingsWindowViewModel  OpenMainWindowOnStartup="True"  x:Key="D_Data">
+            
+        </ViewModel:SettingsWindowViewModel>
+            <local:ApplicationInfo x:Key="ApplicationInfo"/>
+        <Style x:Key="ButtonStyle1showArchived" TargetType="{x:Type Button}" BasedOn="{x:Null}">
+            <Setter Property="FocusVisualStyle" Value="{DynamicResource SimpleButtonFocusVisual}"/>
+            <Setter Property="Background" Value="{DynamicResource NormalBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource NormalBorderBrush}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+
+                        <!-- We use Grid as a root because it is easy to add more elements to customize the button -->
+                        <Grid x:Name="Grid">
+                            <Border x:Name="Border" Background="#00E22866" Padding="{TemplateBinding Padding}" CornerRadius="2" BorderBrush="{DynamicResource DisabledForegroundBrush}" BorderThickness="1"/>
+
+                            <!-- Content Presenter is where the text content etc is placed by the control -->
+                            <!-- The bindings are useful so that the control can be parameterized without editing the template -->
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True"/>
+                        </Grid>
+
+                        <!--Each state sets a brush on the Border in the template -->
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="true"/>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="Border" Value="{DynamicResource DisabledBorderBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="BorderBrush" TargetName="Border" Value="{DynamicResource DisabledBackgroundBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="true"/>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
+                                <Setter Property="Opacity" TargetName="Border" Value="0.4"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <local:boolToVisibilityInverted x:Key="boolToVisibilityInverted"/>
+        <local:visibleWhenGreaterThanConverter x:Key="visibleWhenGreaterThanConverter"/>
+        <DataTemplate x:Key="PresetDeclarationTemplate" DataType="{x:Type local:CLWPresetDeclaration}">
+            <Grid  x:Name="grd" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="18" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" SharedSizeGroup="Browse"/>
+                    <ColumnDefinition Width="auto" SharedSizeGroup="AutoLoad"/>
+                    <ColumnDefinition Width="auto" SharedSizeGroup="AutoStart"/>
+                    <ColumnDefinition Width="auto" SharedSizeGroup="Delete"/>
+                </Grid.ColumnDefinitions>
+                <Custom:PackIconFontAwesome Kind="FileAltSolid" Width="16" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBox x:Name="tb" Grid.Column="1" Text="{Binding Path, Mode=TwoWay}" Margin="6 8" Padding="2,0,16,0" VerticalAlignment="Center" ToolTip="{Binding Path}"  />
+
+                <Button Margin="4 0"  Grid.Column="2" attached:BrowsePathCommand.OperationType="file" attached:BrowsePathCommand.TargetTextBox="{Binding ElementName=tb}"  Style="{DynamicResource MaterialDesignFlatDarkButton}" Foreground="{DynamicResource MaterialDesignBody}"  Padding="0" Width="16" Height="16" ToolTip="Browse" >
+                    <materialDesign:PackIcon Kind="DotsHorizontal" Width="16" Height="16"/>
+                </Button>
+                <CheckBox Margin="4,0"  Grid.Column="3" HorizontalAlignment="Center" IsChecked="{Binding AutoLoad, Mode=TwoWay}" ToolTip="Auto Load"  />
+
+                <CheckBox Margin="4,0"  Grid.Column="4" HorizontalAlignment="Center" IsChecked="{Binding AutoStart, Mode=TwoWay}" ToolTip="Auto Start" />
+
+                <Button   Grid.Column="5" Command="{Binding DataContext.DeletePresetDeclarationCommand, ElementName=window}" CommandParameter="{Binding}"  Margin="4 0"  Style="{DynamicResource MaterialDesignFlatDarkButton}"  Padding="0" Width="16" Height="16" Foreground="#FFF0382F" ToolTip="Delete Preset Declaration" >
+                    <materialDesign:PackIcon Kind="Minus" Width="16" Height="16"/>
+                </Button>
+            </Grid>
+
+        </DataTemplate>
+
+    </Window.Resources>
+    <Grid>
+        <Grid Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="42"/>
+            </Grid.RowDefinitions>
+            <TabControl 
+                
+				Style="{StaticResource MaterialDesignNavigatilRailTabControl}" BorderThickness="0" Margin="0,0,8,0" VerticalAlignment="Top">
+                <TabItem  
+					materialDesign:ColorZoneAssist.Mode="Custom"   materialDesign:ColorZoneAssist.Foreground="{DynamicResource MaterialDesignBody}"
+					Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+
+                    <TabItem.Header>
+                        <Custom:PackIconFontAwesome   Kind="FileCodeSolid" Width="24" Height="24"/>
+                    </TabItem.Header>
+
+                    <Grid  Margin="10,0,0,0" Grid.IsSharedSizeScope="True">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock  Margin="0,6,0,10" FontSize="14.667" ><Run Text="Presets Declarations" /></TextBlock>
+
+
+
+
+
+
+
+                        <ListBox attached:ListBoxProps.AddButtonCommand="{Binding AddPresetDeclarationCommand}" Grid.Row="1" Background="{DynamicResource MaterialDesignPaper}"  ItemsSource="{Binding PressetsDeclarations}" Grid.IsSharedSizeScope="True" AlternationCount="2" MaxHeight="220" VerticalContentAlignment="Stretch" VerticalAlignment="Top" >
+
+                            <ListBox.Template>
+                                <ControlTemplate TargetType="{x:Type ListBox}" >
+                                    <Border Grid.IsSharedSizeScope="True" x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="True">
+                                        <Grid Grid.IsSharedSizeScope="True">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="32"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid Grid.Row="0" Visibility="{Binding Items.Count, ConverterParameter=0, Converter={StaticResource visibleWhenGreaterThanConverter}, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"  >
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="auto" SharedSizeGroup="Browse"/>
+                                                    <ColumnDefinition Width="32" SharedSizeGroup="AutoLoad"/>
+                                                    <ColumnDefinition Width="32" SharedSizeGroup="AutoStart"/>
+                                                    <ColumnDefinition Width="22" SharedSizeGroup="Delete"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="Path"  />
+                                                <TextBlock Text="Load" Grid.Column="2" />
+                                                <TextBlock Text="Start" Grid.Column="3"/>
+                                            </Grid>
+                                            <ScrollViewer Grid.IsSharedSizeScope="True" Grid.Row="1" Focusable="False" Padding="{TemplateBinding Padding}">
+                                                <ItemsPresenter Grid.IsSharedSizeScope="True" />
+                                            </ScrollViewer>
+                                            <Grid Grid.Row="2" >
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="auto" />
+                                                    <ColumnDefinition Width="auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <Button Command="{Binding (attached:ListBoxProps.AddButtonCommand), RelativeSource={RelativeSource TemplatedParent}}" 
+													Style="{DynamicResource MaterialDesignFlatDarkButton}" Foreground="{DynamicResource MaterialDesignBody}"  Padding="0" Width="18" Height="18" ToolTip="Add declaration">
+                                                    <Custom:PackIconFontAwesome   Kind="PlusSolid"/>
+                                                </Button>
+
+                                            </Grid>
+
+                                        </Grid>
+
+                                    </Border>
+
+                                </ControlTemplate>
+                            </ListBox.Template>
+
+
+                            <ListBox.ItemContainerStyle >
+
+                                <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource MaterialDesignListBoxItem}">
+                                    <Setter Property="Grid.IsSharedSizeScope" Value="True"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                                <Grid Background="{TemplateBinding Background}" Grid.IsSharedSizeScope="True">
+                                                    <ContentPresenter Grid.IsSharedSizeScope="True"/>
+                                                </Grid>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="ContentTemplate" Value="{StaticResource PresetDeclarationTemplate}"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                            <Setter Property="Background" Value="{DynamicResource MaterialDesignFlatButtonClick}"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+
+
+                            </ListBox.ItemContainerStyle>
+                        </ListBox>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </Grid>
+                </TabItem>
+                <TabItem
+					materialDesign:ColorZoneAssist.Mode="Custom"   materialDesign:ColorZoneAssist.Foreground="{DynamicResource MaterialDesignBody}"
+					Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                    <TabItem.Header>
+                        <Custom:PackIconFontAwesome   Kind="CogsSolid" Width="24" Height="24"/>
+                    </TabItem.Header>
+                    <StackPanel Orientation="Vertical" d:LayoutOverrides="Height" VerticalAlignment="Top" Margin="10,0,0,0">
+                        <TextBlock Margin="0,6,0,10" FontSize="14.667" ><Run Text="General settings" /></TextBlock>
+                        <CheckBox Content="Open MainWindow at startup" Margin="0,4" IsChecked="{Binding OpenMainWindowOnStartup}"/>
+                        <CheckBox Content="Allow multiple notifications" Margin="0,4" IsChecked="{Binding AllowMultipleNotifications}"/>
+                        <CheckBox Content="Automatically close notification when theres is user actvity" IsChecked="{Binding CloseNotifWhenUserActive}" Margin="0,4"/>
+                        <CheckBox Content="Run CLW when the computer starts" IsChecked="{Binding AutoRunCLW}" Margin="0,4"/>
+                        <StackPanel Orientation="Horizontal"  Margin="0,4,0,0">
+                            <TextBlock Text="Checking concurrency" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBox  MinWidth="30" Margin="10,0,0,0" Text="{Binding MaxCheckingConcurrency}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <TextBlock  Foreground="{DynamicResource MaterialDesignBodyLight}" VerticalAlignment="Top" Margin="10,0,0,4" ><Run FontStyle="Italic" Text="Concurrent cheking tasks may consume CPU resources"/></TextBlock>
+                        <StackPanel Orientation="Horizontal"  Margin="0,4,0,0">
+                            <TextBlock Text="Items per page" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBox  MinWidth="30" Margin="10,0,0,0" Text="{Binding ItemsPerPage}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </StackPanel>
+                </TabItem>
+
+
+                <TabItem
+					materialDesign:ColorZoneAssist.Mode="Custom"   materialDesign:ColorZoneAssist.Foreground="{DynamicResource MaterialDesignBody}"
+    
+					Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+
+                    <TabItem.Header>
+                        <Custom:PackIconFontAwesome   Kind="DownloadSolid" Width="24" Height="24"/>
+                    </TabItem.Header>
+                    <StackPanel Orientation="Vertical" d:LayoutOverrides="Height" VerticalAlignment="Top" Margin="10,0,0,0">
+                        <TextBlock Margin="0,6,0,10" FontSize="14.667" Text="Web Client" />
+                        <StackPanel Margin="0 4" Orientation="Horizontal">
+                            <CheckBox Content="Dev_IsMockedWebClient" VerticalAlignment="Center"  IsChecked="{Binding Dev_IsMockedWebClient}"/>
+                            <Button Command="{Binding DevStartMockingServerCommand}" VerticalAlignment="Center"  Content="Start Server" Margin="6 0"/>
+                        </StackPanel>
+                        <CheckBox Content="Dev_IsCrapifyProxyEnabled (not supported)" Margin="0,4" IsChecked="{Binding Dev_IsCrapifyProxyEnabled}"/>
+                        
+                        <CheckBox Content="Always spoof User-Agent as chrome browser" IsChecked="{Binding CloseNotifWhenUserActive}" Margin="0,4"/>
+                        <CheckBox Content="Run CLW when the computer starts" IsChecked="{Binding AutoRunCLW}" Margin="0,4"/>
+                        <StackPanel Orientation="Horizontal"  Margin="0,4,0,0">
+                            <TextBlock Text="Bandwidth limit" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBox  MinWidth="30" Margin="10,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <TextBlock  Foreground="{DynamicResource MaterialDesignBodyLight}" VerticalAlignment="Top" Margin="10,0,0,4" ><Run FontStyle="Italic" Text="Tasks will be daleyed accordignly "/></TextBlock>
+                    </StackPanel>
+
+
+                </TabItem>
+                <TabItem
+					materialDesign:ColorZoneAssist.Mode="Custom"   materialDesign:ColorZoneAssist.Foreground="{DynamicResource MaterialDesignBody}"
+					Width="72" Height="72">
+                    <TabItem.DataContext>
+                        <StaticResource ResourceKey="ApplicationInfo"/>
+                    </TabItem.DataContext>
+                    <TabItem.Style>
+                        <StaticResource ResourceKey="MaterialDesignNavigationRailTabItem"/>
+                    </TabItem.Style>
+                    <TabItem.Header>
+                        <Custom:PackIconFontAwesome   Kind="QuestionSolid" Width="24" Height="24"/>
+                    </TabItem.Header>
+                    <StackPanel Orientation="Vertical" d:LayoutOverrides="Height" VerticalAlignment="Top" Margin="10,0,0,0" Grid.IsSharedSizeScope="True">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <TextBlock Text="CLW" Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                            <TextBlock Text="{Binding CLW_VERSION}" Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Margin="6,0,0,0" VerticalAlignment="Center" />
+                        </StackPanel>
+                        <Grid Margin="0,3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" SharedSizeGroup="key"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Version"/>
+                            <TextBlock Text="{Binding CLW_VERSION}" Grid.Column="1" Margin="6,0,0,0"/>
+                        </Grid>
+                        <Grid Margin="0,3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" SharedSizeGroup="key"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Developer:" />
+                            <TextBlock Text="{Binding CLW_DEVELOPER_EMAIL}" Grid.Column="1" Margin="6,0,0,0"/>
+                        </Grid>
+                        <Grid Margin="0,3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" SharedSizeGroup="key"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Report issues &amp; Contribute:"/>
+                            <TextBlock Grid.Column="1" Margin="6,0,0,0" ><Hyperlink  Style="{StaticResource MaterialDesignCaptionHyperlink}"><Run Text="{Binding CLW_GITHUB_URL}" /></Hyperlink></TextBlock>
+                        </Grid>
+                        <Grid Margin="0,3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" SharedSizeGroup="key"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Host Rendering Tier:"/>
+                            <TextBlock Text="{Binding Host_Rendering_Tier}" Grid.Column="1" Margin="6,0,0,0"/>
+                        </Grid>
+                    </StackPanel>
+
+
+                </TabItem>
+            </TabControl>
+            <Grid x:Name="footer_Copy" Margin="0" Background="{DynamicResource MaterialDesignTextFieldBoxDisabledBackground}" Grid.Row="1" Height="38" HorizontalAlignment="Center" VerticalAlignment="Bottom" >
+                <StackPanel HorizontalAlignment="Right" Margin="0,0,10,0" Orientation="Horizontal">
+                    <Button x:Name="OKbutton" Command="{Binding SaveCommand}" materialDesign:ButtonAssist.CornerRadius="0" IsDefault="True" BorderBrush="{DynamicResource MaterialDesignBody}"   Style="{StaticResource MaterialDesignOutlinedSecondaryLightButton}" Foreground="{DynamicResource MaterialDesignBody}" Content="OK" VerticalAlignment="Center" d:LayoutOverrides="TopPosition, BottomPosition" Margin="0,0,2,0" Height="Auto" />
+                    <Path Data="M427.375,3.1386719 L427.125,35.125266" Fill="#FFF4F4F5" Margin="2" Stretch="Fill" Stroke="#FF393942" UseLayoutRounding="False" Width="1" Height="26" VerticalAlignment="Center"  d:LayoutOverrides="TopPosition, BottomPosition"/>
+
+                    <Button x:Name="CancelButton" Foreground="{DynamicResource MaterialDesignBody}" BorderBrush="{DynamicResource MaterialDesignBody}" Command="{Binding CancelCommand}" materialDesign:ButtonAssist.CornerRadius="0" IsCancel="True" Style="{StaticResource MaterialDesignOutlinedSecondaryLightButton}" VerticalAlignment="Center"  Content="Cancel" d:LayoutOverrides="TopPosition, BottomPosition" HorizontalAlignment="Right" Margin="2,0,0,0" Height="Auto" />
+
+                </StackPanel>
+                <Path x:Name="hrLine" Data="M427.375,8.896259 L425.77778,32.002766" Fill="#FFF4F4F5" Margin="0" Stretch="Fill" Stroke="#FF393942" UseLayoutRounding="False" Height="1" VerticalAlignment="Top"/>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Window>
