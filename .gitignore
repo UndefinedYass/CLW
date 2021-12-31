@@ -16,3 +16,5 @@ CLWTest/
 TestResults/
 curl.exe
 packages/
+*.yasscmd
+./*.htm
